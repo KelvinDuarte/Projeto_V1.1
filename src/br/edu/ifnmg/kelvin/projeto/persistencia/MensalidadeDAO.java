@@ -24,7 +24,9 @@ public class MensalidadeDAO {
     private static final String SQL_UPDATE = "UPDATE MENSALIDADES SET NOME = ?, DATA_EMISSAO = ?, DATA_VENCIMENTO = ?, VALOR_A_PAGAR = ?, STATUS = ?";
     private static final String SQL_DELETE = "DELETE FROM MENSALIDADES WHERE ID_MENSALIDADE = ?";
     private static final String SQL_BUSCAR_TODOS = "SELECT * FROM MENSALIDADES";
-    
+    private static final String SQL_BUSCAR_NOME = "SELECT * FROM MENSALIDADES WHERE NOME = ?";
+    private static final String SQL_BUSCAR_DATA = "SELECT * FROM MENSALIDADES WHERE MONTH(DATA_VENCIMENTO) = ?";
+    private static final String SQL_BUSCAR_NOME_DATA = "SELECT * FROM MENSALIDADES WHERE NOME = ? AND MONTH(DATA_VENCIMENTO) = ?";    
     public void cadastrarMensalidade(Mensalidade mensalidade) throws SQLException{
         Connection conexao = null;
         PreparedStatement comando = null;
@@ -99,6 +101,101 @@ public class MensalidadeDAO {
         }        
     }
     
+    public List<Mensalidade> pesquisarPorNome(String nome) throws SQLException{
+        List<Mensalidade> listaMensalidade = new ArrayList<>();
+        Mensalidade mensalidade = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_NOME);
+            
+            comando.setString(1, nome);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                mensalidade = new Mensalidade();
+                mensalidade.setId_mensalidade(resultado.getInt(1));
+                mensalidade.setNome(resultado.getString(2));
+                mensalidade.setDataEmissao(resultado.getDate(3));
+                mensalidade.setDataVencimento(resultado.getDate(4));
+                mensalidade.setValorAPagar(resultado.getDouble(5));
+                mensalidade.setStatus(resultado.getString(6)); 
+                listaMensalidade.add(mensalidade);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaMensalidade;
+    }
+    
+    public List<Mensalidade> pesquisarPorData(int mes) throws SQLException{
+        List<Mensalidade> listaMensalidade = new ArrayList<>();
+        Mensalidade mensalidade = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_DATA);
+            comando.setInt(1, mes);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                mensalidade = new Mensalidade();
+                mensalidade.setId_mensalidade(resultado.getInt(1));
+                mensalidade.setNome(resultado.getString(2));
+                mensalidade.setDataEmissao(resultado.getDate(3));
+                mensalidade.setDataVencimento(resultado.getDate(4));
+                mensalidade.setValorAPagar(resultado.getDouble(5));
+                mensalidade.setStatus(resultado.getString(6)); 
+                listaMensalidade.add(mensalidade);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaMensalidade;
+    }    
+
+    public List<Mensalidade> pesquisarPorNomeData(String nome, int mes) throws SQLException{
+        List<Mensalidade> listaMensalidade = new ArrayList<>();
+        Mensalidade mensalidade = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_NOME_DATA);
+            comando.setString(1,nome);
+            comando.setInt(2, mes);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                mensalidade = new Mensalidade();
+                mensalidade.setId_mensalidade(resultado.getInt(1));
+                mensalidade.setNome(resultado.getString(2));
+                mensalidade.setDataEmissao(resultado.getDate(3));
+                mensalidade.setDataVencimento(resultado.getDate(4));
+                mensalidade.setValorAPagar(resultado.getDouble(5));
+                mensalidade.setStatus(resultado.getString(6)); 
+                listaMensalidade.add(mensalidade);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaMensalidade;
+    } 
+
     public List<Mensalidade> buscarTodos() throws SQLException{    
         Connection conexao = null;
         PreparedStatement comando = null;
