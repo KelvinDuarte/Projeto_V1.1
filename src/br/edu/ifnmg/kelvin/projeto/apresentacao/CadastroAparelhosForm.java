@@ -26,15 +26,13 @@ public class CadastroAparelhosForm extends javax.swing.JFrame {
     
    public CadastroAparelhosForm() {
         this.aparelhoEmEdicao = new Aparelho();
-        this.prepararTela();        
-        setLocationRelativeTo(null);      
+        this.prepararTela();             
     }
     
     public CadastroAparelhosForm(Aparelho aparelhoParaEdicao){
         this.aparelhoEmEdicao = aparelhoParaEdicao;
         this.prepararTela();
-        this.inicializarCamposTela();
-        setLocationRelativeTo(null);       
+        this.inicializarCamposTela();      
     }
     
     public void inicializarCamposTela(){
@@ -42,7 +40,9 @@ public class CadastroAparelhosForm extends javax.swing.JFrame {
         txtCodigo.setText(codigo);
         txtNome.setText(aparelhoEmEdicao.getNome());
         String quantidade = Integer.toString(aparelhoEmEdicao.getQuantidade());
-        txtQuantidade.setText(quantidade);    
+        txtQuantidade.setText(quantidade);
+        cboTipo.setSelectedItem(aparelhoEmEdicao.getTipo());
+        cboCategoria.setSelectedItem(aparelhoEmEdicao.getCategoria());
     }
     
     public void cadastrarAparelho(){
@@ -75,6 +75,7 @@ public class CadastroAparelhosForm extends javax.swing.JFrame {
     private void prepararTela(){
         try{
             this.initComponents();
+            setLocationRelativeTo(null); 
             } catch (Exception e) {
             String mensagem = "Erro inesperado! Informe a mensagem de erro ao administrador do sistema.";
             mensagem += "\nMensagem de erro:\n" + e.getMessage();
