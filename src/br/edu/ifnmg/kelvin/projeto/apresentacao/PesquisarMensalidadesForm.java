@@ -12,6 +12,7 @@ import br.edu.ifnmg.kelvin.projeto.negocio.MensalidadeBO;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import javax.swing.table.AbstractTableModel;
 public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
     private List<Atleta> atletas;  
     private List<Mensalidade> mensalidades;
+    private SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
     /**
      * Creates new form Financas
      */
@@ -103,7 +105,25 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
             this.dispose();
         }         
      }      
-    
+    // lançar exceção
+    public void pesquisar() throws SQLException{
+        MensalidadeBO mensalidadeBO = new MensalidadeBO();
+        //condição se o nome e data são nulls
+        if(cboAtletas.getSelectedItem().equals(" ") && txtDataMensalidade.getText().equals("  /  /    ")){
+            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
+        //condição se nome do atleta é valido e data null
+        }else if(cboAtletas.getSelectedItem().toString() != null && txtDataMensalidade.getText().equals("  /  /    ")){
+            this.carregarTabelaMensalidadePorNome(cboAtletas.getSelectedItem().toString());
+        //condição se nome é null e data valida
+        }else if(cboAtletas.getSelectedItem().equals(" ") && txtDataMensalidade.getText() != "  /  /    "){
+           // mensalidadeBO.pesquisarPorData(txtDataMensalidade.getText());
+            
+        }
+        else{
+            //mensalidadeBO.pesquisarDataNome(cboAtletas.getSelectedItem().toString(),txtDataMensalidade.getText());
+            
+        }
+    }
     
      public void carregarTabelaMensalidade() throws SQLException{
         MensalidadeBO mensalidadeBO = new MensalidadeBO();
@@ -112,7 +132,14 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         tblResultado.setModel(modeloTabelaMensalidade);  
         
     }     
-    
+
+     public void carregarTabelaMensalidadePorNome(String nome) throws SQLException{
+        MensalidadeBO mensalidadeBO = new MensalidadeBO();
+        mensalidadeBO.pesquisarPorNome(nome);        
+        ModeloTabelaMensalidade modeloTabelaMensalidade = new ModeloTabelaMensalidade() {};
+        tblResultado.setModel(modeloTabelaMensalidade);  
+        
+    }     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -337,7 +364,11 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExcluir1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-
+        try {
+            this.pesquisar();
+        } catch (SQLException ex) {
+            
+        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
