@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Cadastrar - Avalia&#xe7;&#xe3;o"/>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="pnlAvaliacao" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="cboAtletas" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="cboAtletas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="pnlAvaliacao" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JTabbedPane" name="pnlAvaliacao">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="pnlSubAvaliacao">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Ficha de Avalia&#xe7;&#xe3;o">
+                <Property name="tabTitle" type="java.lang.String" value="Ficha de Avalia&#xe7;&#xe3;o"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="pnlPerimetros" alignment="1" max="32767" attributes="0"/>
+                          <Component id="pnlDobrasCutaneas" alignment="1" max="32767" attributes="0"/>
+                          <Component id="pnlResistencia" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cboAvaliador" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="lblDataAvaliacao" max="32767" attributes="0"/>
+                                  <Component id="txtDataAvaliacao" min="-2" pref="87" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblDataValidade" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDataValidade" min="-2" pref="81" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblPeso1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtAltura" min="-2" pref="102" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="lblAvaliador" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblPeso" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtPeso" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="lblFrequenciaCardiaca" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtFrequenciaCardiaca" min="-2" pref="90" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="lblPressaoArterial" min="-2" pref="146" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txtPressaoArterial" min="-2" pref="84" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblFrequenciaCardiaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtFrequenciaCardiaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPressaoArterial" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPressaoArterial" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblPeso1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtAltura" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pnlPerimetros" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pnlDobrasCutaneas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pnlResistencia" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblAvaliador" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cboAvaliador" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblDataAvaliacao" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtDataValidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDataAvaliacao" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblDataValidade" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Container class="javax.swing.JPanel" name="pnlPerimetros">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Per&#xed;metros">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblCintura" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtCintura" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                  <Component id="lblQuadril" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtQuadril" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblTorax" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtTorax" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="lblAbdome" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtAbdome" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblAntebraco" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBraco" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblEsquerdo1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtBracoEsquerdo" pref="60" max="32767" attributes="0"/>
+                                  <Component id="txtAntebracoEsquerdo" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtBracoDireito" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="txtAntebracoDireito" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="lblDireito1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="lblPanturrilha" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCoxa" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblEsquerdo2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="lblDireito2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtCoxaEsquerda" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtCoxaDireita" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="txtPanturrilhaEsquerda" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtPanturrilhaDireita" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="txtCintura" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCintura" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="lblDireito2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblEsquerdo2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="lblDireito1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblEsquerdo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtAntebracoEsquerdo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCoxaEsquerda" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCoxaDireita" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblCoxa" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAntebraco" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtAntebracoDireito" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtAbdome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblAbdome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtTorax" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblTorax" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtBracoDireito" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblPanturrilha" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtPanturrilhaEsquerda" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtPanturrilhaDireita" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblBraco" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtBracoEsquerdo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtQuadril" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblQuadril" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblTorax">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="T&#xf3;rax"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTorax">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblCintura">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cintura"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtCintura">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblAbdome">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Abdome"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtAbdome">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblQuadril">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Quadril"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtQuadril">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblAntebraco">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Antebraco"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtAntebracoEsquerdo">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblBraco">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Braco"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtBracoDireito">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtPanturrilhaEsquerda">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblCoxa">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Coxa"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblPanturrilha">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Panturrilha"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtCoxaEsquerda">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCoxaEsquerdaActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtCoxaDireita">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCoxaDireitaActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtPanturrilhaDireita">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtAntebracoDireito">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtBracoEsquerdo">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblDireito1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Direito"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblEsquerdo1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Esquerdo"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblEsquerdo2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Esquerdo"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblDireito2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Direito"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnlDobrasCutaneas">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Dobras Cut&#xe2;neas">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblSubscapular" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtSubscapular" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblTricipital" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtTricipital" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblPeitoral" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtPeitoral" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblAxilarMedia" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtAxilarMedia" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblSupraIliaca" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtSupraIliaca" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblAbdominal" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtAbdominal" min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="lblDobraCoxa" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtDobraCoxa" min="-2" pref="60" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblSubscapular" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSubscapular" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtAxilarMedia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAxilarMedia" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDobraCoxa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtDobraCoxa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblTricipital" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTricipital" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSupraIliaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSupraIliaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblPeitoral" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPeitoral" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtAbdominal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAbdominal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblSubscapular">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Subscapular"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtSubscapular">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblTricipital">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tricipital"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtTricipital">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblPeitoral">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Peitoral"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtPeitoral">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtAxilarMedia">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtSupraIliaca">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtAbdominal">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblAbdominal">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Abdominal"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblSupraIliaca">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Supra-Il&#xed;aca"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblAxilarMedia">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Axilar-M&#xe9;dia"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblDobraCoxa">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Coxa"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtDobraCoxa">
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JPanel" name="pnlResistencia">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Resist&#xea;ncia">
+                      <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                        <EtchetBorder/>
+                      </Border>
+                    </TitledBorder>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblFlexoes" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtFlexoes" min="-2" pref="102" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblAbdominais" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtAbdominais" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblFlexoes" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtFlexoes" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblAbdominais" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtAbdominais" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JLabel" name="lblFlexoes">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Flex&#xf5;es"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtFlexoes">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblAbdominais">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Abdominais"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtAbdominais">
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="lblPeso">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Peso"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtPeso">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblPeso1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Altura"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtAltura">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblFrequenciaCardiaca">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Frequ&#xea;ncia Cardiaca (repouso)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtFrequenciaCardiaca">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblPressaoArterial">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Press&#xe3;o Arterial (repouso)"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtPressaoArterial">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblAvaliador">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Avaliador Respons&#xe1;vel"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cboAvaliador">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblDataAvaliacao">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data da Avalia&#xe7;&#xe3;o"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtDataAvaliacao">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                  <Format format="##/##/####" subtype="-1" type="5"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblDataValidade">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Data de Validade"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtDataValidade">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                  <Format format="##/##/####" subtype="-1" type="5"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCadastrar">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/ok3.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Cadastrar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCancelar">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/cancel20.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Cancelar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nome do Atleta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cboAtletas">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+  </SubComponents>
+</Form>
