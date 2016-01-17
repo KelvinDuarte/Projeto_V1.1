@@ -30,6 +30,12 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
     public PesquisarPersonalTrainersForm() throws SQLException {
         this.prepararTela();
     }
+
+    private void prepararTela() throws SQLException{
+        this.initComponents();
+        this.carregarComboPersonals();
+        this.carregarTabelaPersonal();
+    }
     
     // Metodo para iniciar o Form centralizdo na tela
     public void setPosicao() {
@@ -59,19 +65,8 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         }
     }
     
-    public void carregarTabelaPersonal() throws SQLException{
-        PersonalBO personalBO = new PersonalBO();
-        this.personals = personalBO.buscarTodos();      
-        ModeloTabelaPersonal modeloTabelaPersonal = new ModeloTabelaPersonal() {};
-        tblResultado.setModel(modeloTabelaPersonal);      
-    }
-                
-    private void prepararTela() throws SQLException{
-        this.initComponents();
-        this.carregarTabelaPersonal();
-    }
+
             
-    
     public void excluirPersonal(){
     try{
             int linhaSelecionada = tblResultado.getSelectedRow();
@@ -104,6 +99,59 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         }        
     }
     
+    public void carregarComboPersonals(){
+        PersonalBO personalBO = new PersonalBO();
+        try {
+            personals = personalBO.buscarTodos();
+        } catch (SQLException ex) {
+        
+        }
+        cboPersonal.removeAllItems();
+        for (PersonalTrainer personal : personals) {
+            cboPersonal.addItem(personal.getNome());
+        }
+    }
+    
+    public void pesquisar() throws SQLException{
+        if(cboPersonal.getSelectedItem().toString().equals(" ") && txtCPF.getText().equals("   .   .   -  ")){
+            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
+            this.carregarTabelaPersonal();
+        }else if(cboPersonal.getSelectedItem().toString() != " " && txtCPF.getText().equals("   .   .   -  ")){
+            this.carregarTabelaPersonalPorNome(cboPersonal.getSelectedItem().toString());
+        }else if(cboPersonal.getSelectedItem().toString().equals(" ") && txtCPF.getText() != "   .   .   -  "){
+            this.carregarTabelaPersonalPorCpf(txtCPF.getText());           
+        }else{
+            this.carregarTabelaPersonalPorNomeCpf(cboPersonal.getSelectedItem().toString(),txtCPF.getText());
+        }        
+    }
+    
+    public void carregarTabelaPersonal() throws SQLException{
+        PersonalBO personalBO = new PersonalBO();
+        this.personals = personalBO.buscarTodos();      
+        ModeloTabelaPersonal modeloTabelaPersonal = new ModeloTabelaPersonal() {};
+        tblResultado.setModel(modeloTabelaPersonal);      
+    }
+    
+    public void carregarTabelaPersonalPorNome(String nome) throws SQLException{
+        PersonalBO personalBO = new PersonalBO();
+        this.personals = personalBO.carregarTabelaPersonalPorNome(nome);      
+        ModeloTabelaPersonal modeloTabelaPersonal = new ModeloTabelaPersonal() {};
+        tblResultado.setModel(modeloTabelaPersonal);      
+    }
+    
+    public void carregarTabelaPersonalPorCpf(String cpf) throws SQLException{
+        PersonalBO personalBO = new PersonalBO();
+        this.personals = personalBO.carregarTabelaPersonalPorCpf(cpf);      
+        ModeloTabelaPersonal modeloTabelaPersonal = new ModeloTabelaPersonal() {};
+        tblResultado.setModel(modeloTabelaPersonal);      
+    }
+    
+    public void carregarTabelaPersonalPorNomeCpf(String nome, String cpf) throws SQLException{
+        PersonalBO personalBO = new PersonalBO();
+        this.personals = personalBO.carregarTabelaPersonalPorNomeCpf(nome, cpf);      
+        ModeloTabelaPersonal modeloTabelaPersonal = new ModeloTabelaPersonal() {};
+        tblResultado.setModel(modeloTabelaPersonal);      
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,13 +169,11 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         tblResultado = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
         pnlFiltro = new javax.swing.JPanel();
-        lblCodigo = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JFormattedTextField();
         lblCPF = new javax.swing.JLabel();
         txtCPF = new javax.swing.JFormattedTextField();
         lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
+        cboPersonal = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setMaximizable(true);
@@ -214,27 +260,26 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
 
         pnlFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
 
-        lblCodigo.setText("Codigo");
-
-        txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        lblCPF.setText("CPF:");
+        lblCPF.setText("CPF");
 
         try {
             txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPF.setText("");
 
-        lblNome.setText("Nome:");
+        lblNome.setText("Nome do Personal Trainer");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
-        jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
+
+        cboPersonal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         javax.swing.GroupLayout pnlFiltroLayout = new javax.swing.GroupLayout(pnlFiltro);
         pnlFiltro.setLayout(pnlFiltroLayout);
@@ -243,39 +288,29 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
             .addGroup(pnlFiltroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome)
+                    .addComponent(cboPersonal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlFiltroLayout.createSequentialGroup()
                         .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFiltroLayout.createSequentialGroup()
-                                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCodigo)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(69, 69, 69)
-                                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCPF)
-                                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lblNome)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 268, Short.MAX_VALUE)))
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCPF)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlFiltroLayout.setVerticalGroup(
             pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFiltroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo)
-                    .addComponent(lblCPF))
+                .addComponent(lblCPF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cboPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -314,9 +349,13 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         this.exibirTelaCadastroPersonal();
     }//GEN-LAST:event_btnNovoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        try {
+            this.pesquisar();
+        } catch (SQLException ex) {
+            
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         try {
@@ -332,17 +371,15 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JComboBox<String> cboPersonal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
-    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlFiltro;
     private javax.swing.JPanel pnlResultado;
     private javax.swing.JTable tblResultado;
     private javax.swing.JFormattedTextField txtCPF;
-    private javax.swing.JFormattedTextField txtCodigo;
-    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 private abstract class ModeloTabelaPersonal extends AbstractTableModel{
         @Override

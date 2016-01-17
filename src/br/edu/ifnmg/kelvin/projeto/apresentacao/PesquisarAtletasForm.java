@@ -31,6 +31,13 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         this.prepararTela();
     }
 
+    private void prepararTela() throws SQLException{
+        this.initComponents();
+        this.carregarComboAtletas();
+        this.carregarTabelaAtleta();  
+        
+    }    
+    
     public void setPosicao() {
         Dimension dimensao = this.getDesktopPane().getSize();
         this.setLocation((dimensao.width - this.getSize().width) / 2, (dimensao.height - this.getSize().height) / 2); 
@@ -87,8 +94,34 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, mensagem, "Personal Trainers Cadastrados", JOptionPane.ERROR_MESSAGE);
             this.dispose();
         }         
-     }
-     
+     }  
+
+    private void carregarComboAtletas() throws SQLException{
+        AtletaBO atletaBO = new AtletaBO();
+        try{
+            atletas = atletaBO.buscarTodos();
+        }catch(SQLException ex){
+        
+        }
+        cboNome.removeAllItems();
+        for(Atleta atleta : atletas){
+            cboNome.addItem(atleta.getNome());
+        }
+    }    
+    
+    public void pesquisar() throws SQLException{
+        if(cboNome.getSelectedItem().toString().equals(" ") && txtCPF.getText().equals("   .   .   -  ")){
+            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
+            this.carregarTabelaAtleta();
+        }else if(cboNome.getSelectedItem().toString() != " " && txtCPF.getText().equals("   .   .   -  ")){
+            this.carregarTabelaAtletaPorNome(cboNome.getSelectedItem().toString());
+        }else if(cboNome.getSelectedItem().toString().equals(" ") && txtCPF.getText() != "   .   .   -  "){
+            this.carregarTabelaAtletaPorCpf(txtCPF.getText());           
+        }else{
+            this.carregarTabelaAtletaPorNomeCpf(cboNome.getSelectedItem().toString(),txtCPF.getText());
+        }        
+    }
+    
     public void carregarTabelaAtleta() throws SQLException{
         AtletaBO atletaBO = new AtletaBO();
         this.atletas = atletaBO.buscarTodos();      
@@ -96,11 +129,26 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         tblResultado.setModel(modeloTabelaAtleta);     
     }
     
-    private void prepararTela() throws SQLException{
-        this.initComponents();
-        this.carregarTabelaAtleta();
+    public void carregarTabelaAtletaPorNome(String nome) throws SQLException{
+        AtletaBO atletaBO = new AtletaBO();
+        this.atletas = atletaBO.carregarTabelaAtletaPorNome(nome);      
+        ModeloTabelaAtleta modeloTabelaAtleta = new ModeloTabelaAtleta(){};
+        tblResultado.setModel(modeloTabelaAtleta);     
+    }    
+
+    public void carregarTabelaAtletaPorCpf(String cpf) throws SQLException{
+        AtletaBO atletaBO = new AtletaBO();
+        this.atletas = atletaBO.carregarTabelaAtletaPorCpf(cpf);      
+        ModeloTabelaAtleta modeloTabelaAtleta = new ModeloTabelaAtleta(){};
+        tblResultado.setModel(modeloTabelaAtleta);     
     }
-               
+    
+    public void carregarTabelaAtletaPorNomeCpf(String Nome, String cpf) throws SQLException{
+        AtletaBO atletaBO = new AtletaBO();
+        this.atletas = atletaBO.carregarTabelaAtletaPorNomeCpf(Nome, cpf);      
+        ModeloTabelaAtleta modeloTabelaAtleta = new ModeloTabelaAtleta(){};
+        tblResultado.setModel(modeloTabelaAtleta);     
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -118,15 +166,11 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         tblResultado = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
         pnlFiltro = new javax.swing.JPanel();
-        lblCodigo = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JFormattedTextField();
         lblCPF = new javax.swing.JLabel();
         txtCPF = new javax.swing.JFormattedTextField();
-        lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
-        lblCategoria = new javax.swing.JLabel();
-        cboCategoria = new javax.swing.JComboBox();
+        lblNomeAtleta = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
+        cboNome = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("Pesquisar - Atletas");
@@ -200,7 +244,7 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         pnlResultadoLayout.setVerticalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,10 +256,6 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
 
         pnlFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
 
-        lblCodigo.setText("Codigo");
-
-        txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
         lblCPF.setText("CPF:");
 
         try {
@@ -223,12 +263,9 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPF.setText("");
 
-        lblNome.setText("Nome:");
-
-        lblCategoria.setText("Categoria");
-
-        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lblNomeAtleta.setText("Nome do Atleta");
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
@@ -238,6 +275,8 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
             }
         });
 
+        cboNome.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+
         javax.swing.GroupLayout pnlFiltroLayout = new javax.swing.GroupLayout(pnlFiltro);
         pnlFiltro.setLayout(pnlFiltroLayout);
         pnlFiltroLayout.setHorizontalGroup(
@@ -245,45 +284,30 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
             .addGroup(pnlFiltroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome)
-                    .addComponent(cboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pnlFiltroLayout.createSequentialGroup()
                         .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlFiltroLayout.createSequentialGroup()
-                                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCodigo)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(69, 69, 69)
-                                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCPF)
-                                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblNome)
-                            .addComponent(lblCategoria)
-                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(lblNomeAtleta)
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCPF)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 418, Short.MAX_VALUE))
+                    .addComponent(cboNome, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlFiltroLayout.setVerticalGroup(
             pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFiltroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodigo)
-                    .addComponent(lblCPF))
+                .addComponent(lblCPF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNomeAtleta)
+                .addGap(1, 1, 1)
+                .addComponent(cboNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,7 +347,11 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-
+        try {
+            this.pesquisar();
+        } catch (SQLException ex) {
+            
+        }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -341,18 +369,14 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JComboBox cboCategoria;
+    private javax.swing.JComboBox<String> cboNome;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
-    private javax.swing.JLabel lblCategoria;
-    private javax.swing.JLabel lblCodigo;
-    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNomeAtleta;
     private javax.swing.JPanel pnlFiltro;
     private javax.swing.JPanel pnlResultado;
     private javax.swing.JTable tblResultado;
     private javax.swing.JFormattedTextField txtCPF;
-    private javax.swing.JFormattedTextField txtCodigo;
-    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 private abstract class ModeloTabelaAtleta extends AbstractTableModel{
         @Override

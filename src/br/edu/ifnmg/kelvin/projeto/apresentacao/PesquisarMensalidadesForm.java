@@ -107,7 +107,6 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
      }      
     // lançar exceção
     public void pesquisar() throws SQLException{
-        MensalidadeBO mensalidadeBO = new MensalidadeBO();
         if(cboAtletas.getSelectedItem().toString().equals(" ") && cboMes.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
             this.carregarTabelaMensalidade();
@@ -280,7 +279,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
             }
         });
 
-        cboAtletas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cboAtletas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         cboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
 

@@ -43,13 +43,6 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
         this.carregarTabelaAparelhos();
     }
     
-    public void carregarTabelaAparelhos() throws SQLException{
-        AparelhoBO aparelhoBO = new AparelhoBO();
-        this.aparelhos = aparelhoBO.buscarTodos();     
-        ModeloTabelaAparelho modeloTabelaAparelho = new ModeloTabelaAparelho() {};
-        tblResultado.setModel(modeloTabelaAparelho);
-    }
-    
     private void editarAparelho(){
         int linhaSelecionada = tblResultado.getSelectedRow();
         if(linhaSelecionada != -1)
@@ -110,6 +103,46 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
         }            
     }
     
+    public void pesquisar() throws SQLException{
+        if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString().equals(" ")){
+            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
+            this.carregarTabelaAparelhos();
+        }else if(cboTipo.getSelectedItem().toString() != " " && cboCategoria.getSelectedItem().toString().equals(" ")){
+            this.carregarTabelaAparelhosPorTipo(cboTipo.getSelectedItem().toString());
+        }else if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString() != " "){
+            this.carregarTabelaAparelhosPorCategoria(cboCategoria.getSelectedItem().toString());           
+        }else{
+            this.carregarTabelaAparelhosPorTipoCategoria(cboTipo.getSelectedItem().toString(),cboCategoria.getSelectedItem().toString());
+        }
+    }    
+
+    public void carregarTabelaAparelhos() throws SQLException{
+        AparelhoBO aparelhoBO = new AparelhoBO();
+        this.aparelhos = aparelhoBO.buscarTodos();     
+        ModeloTabelaAparelho modeloTabelaAparelho = new ModeloTabelaAparelho() {};
+        tblResultado.setModel(modeloTabelaAparelho);
+    }
+
+    public void carregarTabelaAparelhosPorTipo(String tipo) throws SQLException{
+        AparelhoBO aparelhoBO = new AparelhoBO();
+        this.aparelhos = aparelhoBO.carregarTabelaAparelhosPorTipo(tipo);     
+        ModeloTabelaAparelho modeloTabelaAparelho = new ModeloTabelaAparelho() {};
+        tblResultado.setModel(modeloTabelaAparelho);
+    }    
+
+    public void carregarTabelaAparelhosPorCategoria(String categoria) throws SQLException{
+        AparelhoBO aparelhoBO = new AparelhoBO();
+        this.aparelhos = aparelhoBO.carregarTabelaAparelhosPorCategoria(categoria);     
+        ModeloTabelaAparelho modeloTabelaAparelho = new ModeloTabelaAparelho() {};
+        tblResultado.setModel(modeloTabelaAparelho);
+    }
+
+    public void carregarTabelaAparelhosPorTipoCategoria(String tipo, String categoria) throws SQLException{
+        AparelhoBO aparelhoBO = new AparelhoBO();
+        this.aparelhos = aparelhoBO.carregarTabelaAparelhosPorTipoCategoria(tipo,categoria);     
+        ModeloTabelaAparelho modeloTabelaAparelho = new ModeloTabelaAparelho() {};
+        tblResultado.setModel(modeloTabelaAparelho);
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,13 +160,11 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
         tblResultado = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
         pnlFiltro = new javax.swing.JPanel();
-        lblCodigo = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JFormattedTextField();
-        lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         lblTipo = new javax.swing.JLabel();
         cboTipo = new javax.swing.JComboBox<>();
+        lblCategoria = new javax.swing.JLabel();
+        cboCategoria = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("Pesquisar - Aparelhos");
@@ -207,23 +238,18 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
         pnlResultadoLayout.setVerticalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(82, 82, 82))
         );
 
         pnlFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtro"));
-
-        lblCodigo.setText("Codigo");
-
-        txtCodigo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-
-        lblNome.setText("Nome:");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
         jButton1.setText("Pesquisar");
@@ -235,7 +261,11 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
 
         lblTipo.setText("Tipo");
 
-        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Aeróbico", "Anaeróbico" }));
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Aeróbico", "Anaeróbico" }));
+
+        lblCategoria.setText("Categoria");
+
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Iniciante", "Intermediário", "Avançado" }));
 
         javax.swing.GroupLayout pnlFiltroLayout = new javax.swing.GroupLayout(pnlFiltro);
         pnlFiltro.setLayout(pnlFiltroLayout);
@@ -244,35 +274,29 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
             .addGroup(pnlFiltroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome)
+                    .addComponent(cboTipo, 0, 574, Short.MAX_VALUE)
+                    .addComponent(cboCategoria, 0, 574, Short.MAX_VALUE)
                     .addGroup(pnlFiltroLayout.createSequentialGroup()
                         .addGroup(pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCodigo)
-                            .addComponent(lblNome)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTipo)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cboTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblCategoria)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlFiltroLayout.setVerticalGroup(
             pnlFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFiltroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblCodigo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblTipo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1))
+                .addComponent(lblCategoria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(108, 108, 108))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,7 +306,7 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlFiltro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -290,10 +314,9 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(pnlFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 169, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -312,7 +335,11 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        try {
+            this.pesquisar();
+        } catch (SQLException ex) {
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -329,17 +356,15 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JComboBox<String> cboCategoria;
     private javax.swing.JComboBox<String> cboTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCodigo;
-    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblTipo;
     private javax.swing.JPanel pnlFiltro;
     private javax.swing.JPanel pnlResultado;
     private javax.swing.JTable tblResultado;
-    private javax.swing.JFormattedTextField txtCodigo;
-    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
     
     private abstract class ModeloTabelaAparelho extends AbstractTableModel{
@@ -365,7 +390,7 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
         
         @Override
         public int getColumnCount(){
-            return 4;
+            return 5;
         }
         
         @Override

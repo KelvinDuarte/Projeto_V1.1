@@ -209,13 +209,6 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
         txtCEP = new javax.swing.JFormattedTextField();
         lblSalario = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
-        pnlUsuarioSistema = new javax.swing.JPanel();
-        lblLogin = new javax.swing.JLabel();
-        txtUsuario = new javax.swing.JTextField();
-        lblSenha = new javax.swing.JLabel();
-        lblRepetirSenha = new javax.swing.JLabel();
-        txtSenha = new javax.swing.JPasswordField();
-        txtRepetirSenha = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -315,12 +308,11 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
                                 .addGroup(pnlPersonalIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblDataAdmissao)
                                     .addComponent(txtDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblSexo))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlPersonalIdentificacaoLayout.createSequentialGroup()
-                        .addComponent(rdoFeminino)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rdoMasculino)
+                            .addComponent(lblSexo)
+                            .addGroup(pnlPersonalIdentificacaoLayout.createSequentialGroup()
+                                .addComponent(rdoFeminino)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rdoMasculino)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnlPersonalIdentificacaoLayout.setVerticalGroup(
@@ -496,9 +488,8 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
                                 .addGroup(pnlPersonalDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCEP)
                                     .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pnlPersonalDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cboNacionalidade, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblNacionalidade, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(cboNacionalidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNacionalidade)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlPersonalDadosPessoaisLayout.createSequentialGroup()
                                 .addGroup(pnlPersonalDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -587,53 +578,6 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
 
         pnlCadastroPersonalTrainer.addTab("Dados Pessoais", pnlPersonalDadosPessoais);
 
-        lblLogin.setText("Usuario");
-
-        lblSenha.setText("Senha");
-
-        lblRepetirSenha.setText("Repetir a Senha");
-
-        javax.swing.GroupLayout pnlUsuarioSistemaLayout = new javax.swing.GroupLayout(pnlUsuarioSistema);
-        pnlUsuarioSistema.setLayout(pnlUsuarioSistemaLayout);
-        pnlUsuarioSistemaLayout.setHorizontalGroup(
-            pnlUsuarioSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUsuarioSistemaLayout.createSequentialGroup()
-                .addGap(212, 212, 212)
-                .addGroup(pnlUsuarioSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUsuario)
-                    .addComponent(txtSenha)
-                    .addComponent(txtRepetirSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlUsuarioSistemaLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(lblLogin))
-                    .addGroup(pnlUsuarioSistemaLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(lblSenha))
-                    .addGroup(pnlUsuarioSistemaLayout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(lblRepetirSenha)))
-                .addContainerGap(225, Short.MAX_VALUE))
-        );
-        pnlUsuarioSistemaLayout.setVerticalGroup(
-            pnlUsuarioSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUsuarioSistemaLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(lblLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(lblSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(lblRepetirSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtRepetirSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
-        );
-
-        pnlCadastroPersonalTrainer.addTab("Usuário Sistema", pnlUsuarioSistema);
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/Personal.fw.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -680,26 +624,6 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
         this.status = status;
     }
 
-    private void txtEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEnderecoActionPerformed
-
-    private void txtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBairroActionPerformed
-
-    private void txtNumeroCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCasaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroCasaActionPerformed
-
-    private void txtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCidadeActionPerformed
-
-    private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCEPActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -715,6 +639,26 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
             this.editarPersonal();        
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCEPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCEPActionPerformed
+
+    private void txtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCidadeActionPerformed
+
+    private void txtNumeroCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroCasaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroCasaActionPerformed
+
+    private void txtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBairroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBairroActionPerformed
+
+    private void txtEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnderecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEnderecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -773,22 +717,18 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblEndereco;
     private javax.swing.JLabel lblExpedicao;
     private javax.swing.JLabel lblFuncao;
-    private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblNacionalidade;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumeroCasa;
     private javax.swing.JLabel lblOrgaoExpedidor;
     private javax.swing.JLabel lblRG;
-    private javax.swing.JLabel lblRepetirSenha;
     private javax.swing.JLabel lblSalario;
-    private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblUF;
     private javax.swing.JTabbedPane pnlCadastroPersonalTrainer;
     private javax.swing.JPanel pnlPersonalDadosPessoais;
     private javax.swing.JPanel pnlPersonalIdentificacao;
-    private javax.swing.JPanel pnlUsuarioSistema;
     private javax.swing.JRadioButton rdoFeminino;
     private javax.swing.JRadioButton rdoMasculino;
     private javax.swing.JTextField txtApelido;
@@ -807,10 +747,7 @@ public class CadastroPersonalTrainerForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumeroCasa;
     private javax.swing.JTextField txtOrgaoExpedidor;
     private javax.swing.JTextField txtRG;
-    private javax.swing.JPasswordField txtRepetirSenha;
     private javax.swing.JTextField txtSalario;
-    private javax.swing.JPasswordField txtSenha;
     private javax.swing.JFormattedTextField txtTelefone;
-    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
