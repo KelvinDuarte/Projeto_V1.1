@@ -107,6 +107,7 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         
         }
         cboPersonal.removeAllItems();
+        cboPersonal.addItem(" ");
         for (PersonalTrainer personal : personals) {
             cboPersonal.addItem(personal.getNome());
         }
@@ -390,6 +391,8 @@ private abstract class ModeloTabelaPersonal extends AbstractTableModel{
             return "Nome";
         } else if (coluna == 2) {
             return "Funçao";
+        } else if (coluna == 3) {
+            return "CPF";
         } else {
             return "Telefone";
         }
@@ -415,9 +418,9 @@ private abstract class ModeloTabelaPersonal extends AbstractTableModel{
         } else if (columnIndex == 2) {
             return personalTrainer.getFuncao();
         } else if (columnIndex == 3) {
-            return personalTrainer.getTelefone();
+            return personalTrainer.getCpf();
         } else {
-            return null;
+            return personalTrainer.getTelefone();
         }
 
     }

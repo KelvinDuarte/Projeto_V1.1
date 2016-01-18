@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.ComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -104,6 +105,7 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         
         }
         cboNome.removeAllItems();
+        cboNome.addItem(" ");
         for(Atleta atleta : atletas){
             cboNome.addItem(atleta.getNome());
         }
@@ -385,6 +387,8 @@ private abstract class ModeloTabelaAtleta extends AbstractTableModel{
                 return "ID";
             }else if(coluna == 1){
                 return "Nome";
+            }else if(coluna == 2){
+                return "CPF";
             }else{
                 return "Data Nascimento";
             }
@@ -397,7 +401,7 @@ private abstract class ModeloTabelaAtleta extends AbstractTableModel{
         
         @Override
         public int getColumnCount(){
-            return 3;
+            return 4;
         }
         
         @Override
@@ -407,6 +411,8 @@ private abstract class ModeloTabelaAtleta extends AbstractTableModel{
                 return atleta.getId_atleta();
             }else if (columnIndex == 1) {
                 return atleta.getNome();
+            }else if (columnIndex == 2){
+                return atleta.getCpf();
             }else{
                 return atleta.getDataNascimento();
             }

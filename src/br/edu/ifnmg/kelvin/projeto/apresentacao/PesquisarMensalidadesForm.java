@@ -107,12 +107,13 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
      }      
     // lançar exceção
     public void pesquisar() throws SQLException{
-        if(cboAtletas.getSelectedItem().toString().equals(" ") && cboMes.getSelectedIndex() == 0){
+        
+        if(cboAtletas.getSelectedItem().toString().equals("") && cboMes.getSelectedIndex()== 0){
             JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
             this.carregarTabelaMensalidade();
-        }else if(cboAtletas.getSelectedItem().toString() != " " && cboMes.getSelectedIndex() == 0){
+        }else if(cboAtletas.getSelectedItem().toString() != "" && cboMes.getSelectedIndex() == 0){
             this.carregarTabelaMensalidadePorNome(cboAtletas.getSelectedItem().toString());
-        }else if(cboAtletas.getSelectedItem().equals(" ") && cboMes.getSelectedIndex() != 0){
+        }else if(cboAtletas.getSelectedItem().equals("") && cboMes.getSelectedIndex() != 0){
             this.carregarTabelaMensalidadePorData(cboMes.getSelectedIndex());           
         }else{
             this.carregarTabelaMensalidadePorNomeData(cboAtletas.getSelectedItem().toString(), cboMes.getSelectedIndex());
@@ -279,7 +280,12 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
             }
         });
 
-        cboAtletas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
+        cboAtletas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cboAtletas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboAtletasActionPerformed(evt);
+            }
+        });
 
         cboMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
 
@@ -383,6 +389,10 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
             
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void cboAtletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAtletasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboAtletasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
