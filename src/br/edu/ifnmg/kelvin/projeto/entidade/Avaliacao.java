@@ -28,8 +28,8 @@ public class Avaliacao {
     private double bracoDireito;
     private double coxaEsquerda;
     private double coxaDireita;
-    private int id_atleta;
-    private int id_personal;
+    private String nomeAtleta;
+    private String nomePersonal;
     private double panturrilhaEsquerda;
     private double panturrilhaDireita;
     private double subscapular;
@@ -38,6 +38,11 @@ public class Avaliacao {
     private double axilarMedia;
     private double supraIliaca;
     private double abdominal;
+    private double coxa;
+    private int flexoes;
+    private int abdominais;
+    private Date dataAvaliacao;
+    private Date dataValidade;
 
     public String getNomeAtleta() {
         return nomeAtleta;
@@ -53,28 +58,6 @@ public class Avaliacao {
 
     public void setNomePersonal(String nomePersonal) {
         this.nomePersonal = nomePersonal;
-    }
-    private double coxa;
-    private int flexoes;
-    private int abdominais;
-    private Date dataAvaliacao;
-    private Date dataValidade;
-    private String nomeAtleta;
-    private String nomePersonal;
-    public int getId_atleta() {
-        return id_atleta;
-    }
-
-    public void setId_atleta(int id_atleta) {
-        this.id_atleta = id_atleta;
-    }
-
-    public int getId_personal() {
-        return id_personal;
-    }
-
-    public void setId_personal(int id_personal) {
-        this.id_personal = id_personal;
     }
     
     public int getId_avaliacao() {

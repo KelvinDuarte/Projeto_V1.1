@@ -104,12 +104,12 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
     }
     
     public void pesquisar() throws SQLException{
-        if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString().equals(" ")){
+        if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
             JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
             this.carregarTabelaAparelhos();
-        }else if(cboTipo.getSelectedItem().toString() != " " && cboCategoria.getSelectedItem().toString().equals(" ")){
+        }else if(cboTipo.getSelectedItem().toString() != "Selecionar" && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
             this.carregarTabelaAparelhosPorTipo(cboTipo.getSelectedItem().toString());
-        }else if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString() != " "){
+        }else if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString() != "Selecionar"){
             this.carregarTabelaAparelhosPorCategoria(cboCategoria.getSelectedItem().toString());           
         }else{
             this.carregarTabelaAparelhosPorTipoCategoria(cboTipo.getSelectedItem().toString(),cboCategoria.getSelectedItem().toString());
@@ -261,11 +261,11 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
 
         lblTipo.setText("Tipo");
 
-        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Aeróbico", "Anaeróbico" }));
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Aeróbico", "Anaeróbico" }));
 
         lblCategoria.setText("Categoria");
 
-        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Iniciante", "Intermediário", "Avançado" }));
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Iniciante", "Intermediário", "Avançado" }));
 
         javax.swing.GroupLayout pnlFiltroLayout = new javax.swing.GroupLayout(pnlFiltro);
         pnlFiltro.setLayout(pnlFiltroLayout);
@@ -314,7 +314,7 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(pnlFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 173, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

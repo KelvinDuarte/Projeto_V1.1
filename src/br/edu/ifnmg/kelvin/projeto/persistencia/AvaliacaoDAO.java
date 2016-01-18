@@ -19,11 +19,13 @@ import java.util.List;
  */
 public class AvaliacaoDAO {
 
-    private static final String SQL_INSERT = "INSERT INTO AVALIACAO(PESO, ALTURA, FREQUENCIA_CARDIACA, PRESSAO_ARTERIAL, TORAX, CINTURA, ABDOME, QUADRIL, ANTEBRACO_ESQUERDO, ANTEBRACO_DIREITO, BRACO_ESQUERDO, BRACO_DIREITO, COXA_ESQUERDA, COXA_DIREITA, ID_ATLETA, ID_PERSONAL, PANTURRILHA_ESQUERDA, PANTURRILHA_DIREITA, SUBSCAPULAR, TRICIPITAL, PEITORAL, AXILARMEDIA, SUPRAILIACA, ABDOMINAL, COXA, FLEXOES, ABDOMINAIS, DATA_AVALIACAO, DATA_VALIDADE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE AVALIACAO SET PESO = ?, ALTURA = ?, FREQUENCIA_CARDIACA = ?, PRESSAO_ARTERIAL = ?, TORAX = ?, CINTURA = ?, ABDOME = ?, QUADRIL = ?, ANTEBRACO_ESQUERDO = ?, ANTEBRACO_DIREITO = ?, BRACO_ESQUERDO = ?, BRACO_DIREITO = ?, COXA_ESQUERDA = ?, COXA_DIREITA = ?, ID_ATLETA = ?, ID_PERSONAL = ?, PANTURRILHA_ESQUERDA = ?, PANTURRILHA_DIREITA = ?, SUBSCAPULAR = ?, TRICIPITAL = ?, PEITORAL = ?, AXILARMEDIA = ?, SUPRAILIACA = ?, ABDOMINAL = ?, COXA = ?, FLEXOES = ?, ABDOMINAIS = ?, DATA_AVALIACAO = ?, DATA_VALIDADE = ?";
-    private static final String SQL_BUSCAR_TODOS = "SELECT * FROM AVALIACAO";
+    private static final String SQL_INSERT = "INSERT INTO AVALIACAO(PESO, ALTURA, FREQUENCIA_CARDIACA, PRESSAO_ARTERIAL, TORAX, CINTURA, ABDOME, QUADRIL, ANTEBRACO_ESQUERDO, ANTEBRACO_DIREITO, BRACO_ESQUERDO, BRACO_DIREITO, COXA_ESQUERDA, COXA_DIREITA, NOME_ATLETA, NOME_PERSONAL, PANTURRILHA_ESQUERDA, PANTURRILHA_DIREITA, SUBSCAPULAR, TRICIPITAL, PEITORAL, AXILARMEDIA, SUPRAILIACA, ABDOMINAL, COXA, FLEXOES, ABDOMINAIS, DATA_AVALIACAO, DATA_VALIDADE) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE AVALIACAO SET PESO = ?, ALTURA = ?, FREQUENCIA_CARDIACA = ?, PRESSAO_ARTERIAL = ?, TORAX = ?, CINTURA = ?, ABDOME = ?, QUADRIL = ?, ANTEBRACO_ESQUERDO = ?, ANTEBRACO_DIREITO = ?, BRACO_ESQUERDO = ?, BRACO_DIREITO = ?, COXA_ESQUERDA = ?, COXA_DIREITA = ?, NOME_ATLETA = ?, NOME_PERSONAL = ?, PANTURRILHA_ESQUERDA = ?, PANTURRILHA_DIREITA = ?, SUBSCAPULAR = ?, TRICIPITAL = ?, PEITORAL = ?, AXILARMEDIA = ?, SUPRAILIACA = ?, ABDOMINAL = ?, COXA = ?, FLEXOES = ?, ABDOMINAIS = ?, DATA_AVALIACAO = ?, DATA_VALIDADE = ?";
     private static final String SQL_DELETE = "DELETE FROM AVALIACAO WHERE ID_AVALIACAO = ?";
-    
+    private static final String SQL_BUSCAR_TODOS = "SELECT * FROM AVALIACAO";
+    private static final String SQL_BUSCAR_ATLETA = "SELECT * FROM AVALIACAO WHERE NOME_ATLETA = ?";
+    private static final String SQL_BUSCAR_PERSONAL = "SELECT * FROM AVALIACAO WHERE NOME_ATLETA = ?";
+    private static final String SQL_BUSCAR_ATLETA_PERSONAL = "SELECT * FROM AVALIACAO WHERE NOME_ATLETA = ? AND NOME_PERSONAL = ?";
     public void cadastrarAvaliacao(Avaliacao avaliacao) throws SQLException{
         Connection conexao = null;
         PreparedStatement comando = null;
@@ -44,8 +46,8 @@ public class AvaliacaoDAO {
             comando.setDouble(12, avaliacao.getBracoDireito());
             comando.setDouble(13, avaliacao.getCoxaEsquerda());
             comando.setDouble(14, avaliacao.getCoxaDireita());
-            comando.setInt(15, avaliacao.getId_atleta());
-            comando.setInt(16, avaliacao.getId_personal());
+            comando.setString(15, avaliacao.getNomeAtleta());
+            comando.setString(16, avaliacao.getNomePersonal());
             comando.setDouble(17, avaliacao.getPanturrilhaEsquerda());
             comando.setDouble(18, avaliacao.getPanturrilhaDireita());
             comando.setDouble(19, avaliacao.getSubscapular());
@@ -93,8 +95,8 @@ public class AvaliacaoDAO {
             comando.setDouble(12, avaliacao.getBracoDireito());
             comando.setDouble(13, avaliacao.getCoxaEsquerda());
             comando.setDouble(14, avaliacao.getCoxaDireita());
-            comando.setInt(15, avaliacao.getId_atleta());
-            comando.setInt(16, avaliacao.getId_personal());
+            comando.setString(15, avaliacao.getNomeAtleta());
+            comando.setString(16, avaliacao.getNomePersonal());
             comando.setDouble(17, avaliacao.getPanturrilhaEsquerda());
             comando.setDouble(18, avaliacao.getPanturrilhaDireita());
             comando.setDouble(19, avaliacao.getSubscapular());
@@ -139,6 +141,178 @@ public class AvaliacaoDAO {
             BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando);
         }         
     }
+
+    public List<Avaliacao> carregarTabelaAvaliacaoPorAtleta(String atleta) throws SQLException{
+        List<Avaliacao> listaAvaliacao = new ArrayList<>();
+        Avaliacao avaliacao = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_ATLETA);           
+            comando.setString(1, atleta);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                avaliacao = new Avaliacao();        
+                avaliacao.setId_avaliacao(resultado.getInt(1));
+                avaliacao.setPeso(resultado.getDouble(2));
+                avaliacao.setAltura(resultado.getDouble(3));
+                avaliacao.setFrequenciaCardiaca(resultado.getDouble(4));
+                avaliacao.setPressaoArterial(resultado.getDouble(5));
+                avaliacao.setTorax(resultado.getDouble(6));
+                avaliacao.setCintura(resultado.getDouble(7));
+                avaliacao.setAbdome(resultado.getDouble(8));
+                avaliacao.setQuadril(resultado.getDouble(9));
+                avaliacao.setAntebracoEsquerdo(resultado.getDouble(10));
+                avaliacao.setAntebracoDireito(resultado.getDouble(11));
+                avaliacao.setBracoEsquerdo(resultado.getDouble(12));
+                avaliacao.setBracoDireito(resultado.getDouble(13));
+                avaliacao.setCoxaEsquerda(resultado.getDouble(14));
+                avaliacao.setCoxaDireita(resultado.getDouble(15));
+                avaliacao.setNomeAtleta(resultado.getString(16));
+                avaliacao.setNomePersonal(resultado.getString(17));
+                avaliacao.setPanturrilhaEsquerda(resultado.getDouble(18));
+                avaliacao.setPanturrilhaDireita(resultado.getDouble(19));
+                avaliacao.setSubscapular(resultado.getDouble(20));
+                avaliacao.setTricipital(resultado.getDouble(21));
+                avaliacao.setPeitoral(resultado.getDouble(22));
+                avaliacao.setAxilarMedia(resultado.getDouble(23));
+                avaliacao.setSupraIliaca(resultado.getDouble(24));
+                avaliacao.setAbdominal(resultado.getDouble(25));
+                avaliacao.setCoxa(resultado.getDouble(26));
+                avaliacao.setFlexoes(resultado.getInt(27));
+                avaliacao.setAbdominais(resultado.getInt(28));
+                java.sql.Date dataAvaliacao = resultado.getDate(29);
+                avaliacao.setDataAvaliacao(dataAvaliacao);
+                java.sql.Date dataValidade = resultado.getDate(30);
+                avaliacao.setDataValidade(dataAvaliacao);
+                listaAvaliacao.add(avaliacao);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaAvaliacao;
+    }
+    
+    public List<Avaliacao> carregarTabelaAvaliacaoPorPersonal(String personal) throws SQLException{
+        List<Avaliacao> listaAvaliacao = new ArrayList<>();
+        Avaliacao avaliacao = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_PERSONAL);           
+            comando.setString(1, personal);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                avaliacao = new Avaliacao();        
+                avaliacao.setId_avaliacao(resultado.getInt(1));
+                avaliacao.setPeso(resultado.getDouble(2));
+                avaliacao.setAltura(resultado.getDouble(3));
+                avaliacao.setFrequenciaCardiaca(resultado.getDouble(4));
+                avaliacao.setPressaoArterial(resultado.getDouble(5));
+                avaliacao.setTorax(resultado.getDouble(6));
+                avaliacao.setCintura(resultado.getDouble(7));
+                avaliacao.setAbdome(resultado.getDouble(8));
+                avaliacao.setQuadril(resultado.getDouble(9));
+                avaliacao.setAntebracoEsquerdo(resultado.getDouble(10));
+                avaliacao.setAntebracoDireito(resultado.getDouble(11));
+                avaliacao.setBracoEsquerdo(resultado.getDouble(12));
+                avaliacao.setBracoDireito(resultado.getDouble(13));
+                avaliacao.setCoxaEsquerda(resultado.getDouble(14));
+                avaliacao.setCoxaDireita(resultado.getDouble(15));
+                avaliacao.setNomeAtleta(resultado.getString(16));
+                avaliacao.setNomePersonal(resultado.getString(17));
+                avaliacao.setPanturrilhaEsquerda(resultado.getDouble(18));
+                avaliacao.setPanturrilhaDireita(resultado.getDouble(19));
+                avaliacao.setSubscapular(resultado.getDouble(20));
+                avaliacao.setTricipital(resultado.getDouble(21));
+                avaliacao.setPeitoral(resultado.getDouble(22));
+                avaliacao.setAxilarMedia(resultado.getDouble(23));
+                avaliacao.setSupraIliaca(resultado.getDouble(24));
+                avaliacao.setAbdominal(resultado.getDouble(25));
+                avaliacao.setCoxa(resultado.getDouble(26));
+                avaliacao.setFlexoes(resultado.getInt(27));
+                avaliacao.setAbdominais(resultado.getInt(28));
+                java.sql.Date dataAvaliacao = resultado.getDate(29);
+                avaliacao.setDataAvaliacao(dataAvaliacao);
+                java.sql.Date dataValidade = resultado.getDate(30);
+                avaliacao.setDataValidade(dataAvaliacao);
+                listaAvaliacao.add(avaliacao);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaAvaliacao;
+    }
+
+    public List<Avaliacao> carregarTabelaAvaliacaoPorAtletaPersonal(String atleta, String personal) throws SQLException{
+        List<Avaliacao> listaAvaliacao = new ArrayList<>();
+        Avaliacao avaliacao = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_ATLETA_PERSONAL);           
+            comando.setString(1, atleta);
+            comando.setString(2, personal);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                avaliacao = new Avaliacao();        
+                avaliacao.setId_avaliacao(resultado.getInt(1));
+                avaliacao.setPeso(resultado.getDouble(2));
+                avaliacao.setAltura(resultado.getDouble(3));
+                avaliacao.setFrequenciaCardiaca(resultado.getDouble(4));
+                avaliacao.setPressaoArterial(resultado.getDouble(5));
+                avaliacao.setTorax(resultado.getDouble(6));
+                avaliacao.setCintura(resultado.getDouble(7));
+                avaliacao.setAbdome(resultado.getDouble(8));
+                avaliacao.setQuadril(resultado.getDouble(9));
+                avaliacao.setAntebracoEsquerdo(resultado.getDouble(10));
+                avaliacao.setAntebracoDireito(resultado.getDouble(11));
+                avaliacao.setBracoEsquerdo(resultado.getDouble(12));
+                avaliacao.setBracoDireito(resultado.getDouble(13));
+                avaliacao.setCoxaEsquerda(resultado.getDouble(14));
+                avaliacao.setCoxaDireita(resultado.getDouble(15));
+                avaliacao.setNomeAtleta(resultado.getString(16));
+                avaliacao.setNomePersonal(resultado.getString(17));
+                avaliacao.setPanturrilhaEsquerda(resultado.getDouble(18));
+                avaliacao.setPanturrilhaDireita(resultado.getDouble(19));
+                avaliacao.setSubscapular(resultado.getDouble(20));
+                avaliacao.setTricipital(resultado.getDouble(21));
+                avaliacao.setPeitoral(resultado.getDouble(22));
+                avaliacao.setAxilarMedia(resultado.getDouble(23));
+                avaliacao.setSupraIliaca(resultado.getDouble(24));
+                avaliacao.setAbdominal(resultado.getDouble(25));
+                avaliacao.setCoxa(resultado.getDouble(26));
+                avaliacao.setFlexoes(resultado.getInt(27));
+                avaliacao.setAbdominais(resultado.getInt(28));
+                java.sql.Date dataAvaliacao = resultado.getDate(29);
+                avaliacao.setDataAvaliacao(dataAvaliacao);
+                java.sql.Date dataValidade = resultado.getDate(30);
+                avaliacao.setDataValidade(dataAvaliacao);
+                listaAvaliacao.add(avaliacao);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaAvaliacao;
+    }    
     
     public List<Avaliacao> buscarTodos() throws SQLException{     
         Connection conexao = null;
@@ -176,8 +350,8 @@ public class AvaliacaoDAO {
         avaliacao.setBracoDireito(resultado.getDouble(13));
         avaliacao.setCoxaEsquerda(resultado.getDouble(14));
         avaliacao.setCoxaDireita(resultado.getDouble(15));
-        avaliacao.setId_atleta(resultado.getInt(16));
-        avaliacao.setId_personal(resultado.getInt(17));
+        avaliacao.setNomeAtleta(resultado.getString(16));
+        avaliacao.setNomePersonal(resultado.getString(17));
         avaliacao.setPanturrilhaEsquerda(resultado.getDouble(18));
         avaliacao.setPanturrilhaDireita(resultado.getDouble(19));
         avaliacao.setSubscapular(resultado.getDouble(20));

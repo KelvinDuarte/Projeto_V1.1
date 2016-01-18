@@ -36,4 +36,19 @@ public class AvaliacaoBO {
         return avaliacaoDAO.buscarTodos();
     }
     
+    public List<Avaliacao> carregarTabelaAvaliacaoPorAtleta(String atleta) throws SQLException{
+        AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+        return avaliacaoDAO.carregarTabelaAvaliacaoPorAtleta(atleta);
+    }
+    
+    public List<Avaliacao> carregarTabelaAvaliacaoPorPersonal(String personal) throws SQLException{
+        AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+        return avaliacaoDAO.carregarTabelaAvaliacaoPorPersonal(personal);
+    }
+    
+    public List<Avaliacao> carregarTabelaAvaliacaoPorAtletaPersonal(String atleta, String personal) throws SQLException{
+        AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
+        return avaliacaoDAO.carregarTabelaAvaliacaoPorAtletaPersonal(atleta,personal);
+    }    
+    
 }

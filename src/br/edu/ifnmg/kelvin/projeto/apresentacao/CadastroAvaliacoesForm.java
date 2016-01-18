@@ -58,7 +58,6 @@ public class CadastroAvaliacoesForm extends javax.swing.JFrame {
     }    
 
     public void inicializarCamposTela(){
-        cboAtletas.setSelectedIndex(avaliacaoEmEdicao.getId_atleta());
         String peso = Double.toString(avaliacaoEmEdicao.getPeso());
         txtPeso.setText(peso);
         String altura = Double.toString(avaliacaoEmEdicao.getAltura());
@@ -87,8 +86,8 @@ public class CadastroAvaliacoesForm extends javax.swing.JFrame {
         txtCoxaEsquerda.setText(coxaEsquerda);
         String coxaDireita = Double.toString(avaliacaoEmEdicao.getCoxaDireita());
         txtCoxaDireita.setText(coxaDireita);
-        cboAtletas.setSelectedIndex(avaliacaoEmEdicao.getId_atleta());
-        cboAvaliador.setSelectedIndex(avaliacaoEmEdicao.getId_personal());
+        cboAtletas.setSelectedItem(avaliacaoEmEdicao.getNomeAtleta());
+        cboAvaliador.setSelectedItem(avaliacaoEmEdicao.getNomePersonal());
         String panturrilhaEsquerda = Double.toString(avaliacaoEmEdicao.getPanturrilhaEsquerda());
         txtPanturrilhaEsquerda.setText(panturrilhaEsquerda);
         String panturrilhaDireita = Double.toString(avaliacaoEmEdicao.getPanturrilhaDireita());
@@ -118,7 +117,7 @@ public class CadastroAvaliacoesForm extends javax.swing.JFrame {
     }
     
     public void recuperarCamposTela() throws ParseException{
-        avaliacaoEmEdicao.setId_atleta(cboAtletas.getSelectedIndex());
+        avaliacaoEmEdicao.setNomeAtleta(cboAtletas.getSelectedItem().toString());
         double peso = Double.parseDouble(txtPeso.getText());
         avaliacaoEmEdicao.setPeso(peso);
         double altura = Double.parseDouble(txtAltura.getText());
@@ -169,7 +168,7 @@ public class CadastroAvaliacoesForm extends javax.swing.JFrame {
         avaliacaoEmEdicao.setFlexoes(flexoes);
         int abdominais = Integer.parseInt(txtAbdominais.getText());
         avaliacaoEmEdicao.setAbdominais(abdominais);
-        avaliacaoEmEdicao.setId_personal(cboAvaliador.getSelectedIndex());
+        avaliacaoEmEdicao.setNomePersonal(cboAvaliador.getSelectedItem().toString());
         avaliacaoEmEdicao.setDataAvaliacao(formatador.parse(txtDataAvaliacao.getText()));
         avaliacaoEmEdicao.setDataValidade(formatador.parse(txtDataValidade.getText()));        
     }

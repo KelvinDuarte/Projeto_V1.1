@@ -107,19 +107,19 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         
         }
         cboPersonal.removeAllItems();
-        cboPersonal.addItem(" ");
+        cboPersonal.addItem("Selecionar");
         for (PersonalTrainer personal : personals) {
             cboPersonal.addItem(personal.getNome());
         }
     }
     
     public void pesquisar() throws SQLException{
-        if(cboPersonal.getSelectedItem().toString().equals(" ") && txtCPF.getText().equals("   .   .   -  ")){
+        if(cboPersonal.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText().equals("   .   .   -  ")){
             JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
             this.carregarTabelaPersonal();
-        }else if(cboPersonal.getSelectedItem().toString() != " " && txtCPF.getText().equals("   .   .   -  ")){
+        }else if(cboPersonal.getSelectedItem().toString() != "Selecionar" && txtCPF.getText().equals("   .   .   -  ")){
             this.carregarTabelaPersonalPorNome(cboPersonal.getSelectedItem().toString());
-        }else if(cboPersonal.getSelectedItem().toString().equals(" ") && txtCPF.getText() != "   .   .   -  "){
+        }else if(cboPersonal.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText() != "   .   .   -  "){
             this.carregarTabelaPersonalPorCpf(txtCPF.getText());           
         }else{
             this.carregarTabelaPersonalPorNomeCpf(cboPersonal.getSelectedItem().toString(),txtCPF.getText());

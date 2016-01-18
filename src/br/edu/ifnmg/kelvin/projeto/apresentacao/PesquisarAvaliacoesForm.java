@@ -5,8 +5,12 @@
  */
 package br.edu.ifnmg.kelvin.projeto.apresentacao;
 
+import br.edu.ifnmg.kelvin.projeto.entidade.Atleta;
 import br.edu.ifnmg.kelvin.projeto.entidade.Avaliacao;
+import br.edu.ifnmg.kelvin.projeto.entidade.PersonalTrainer;
+import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.AvaliacaoBO;
+import br.edu.ifnmg.kelvin.projeto.negocio.PersonalBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,6 +28,8 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
     private CadastroAvaliacoesForm editarAvaliacaoForm;
     private CadastroAvaliacoesForm novoAvaliacaoForm;
     private List<Avaliacao> avaliacoes;
+    private List<Atleta> atletas;
+    private List<PersonalTrainer> personals;
     
     /**
      * Creates new form PesquisarAvaliacoesForm
@@ -34,6 +40,8 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
     
     public void prepararTela() throws SQLException{
         initComponents();
+        this.carregarComboAtletas();
+        this.carregarComboPersonal();
         this.carregarTabelaAvaliacao();
     }
     
@@ -72,15 +80,15 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
                 Avaliacao avaliacaoSelecionado = avaliacoes.get(linhaSelecionada);
                 int resposta;
                 String mensagem = "Deseja excluir a Avaliação ID? "
-                        + avaliacaoSelecionado.getId_avaliacao()+ " (Do Atleta ID: "
-                        + avaliacaoSelecionado.getId_atleta()+ ")?";
+                        + avaliacaoSelecionado.getId_avaliacao()+ " (Do Atleta: "
+                        + avaliacaoSelecionado.getNomeAtleta()+ ")?";
                 String titulo = "Exclusão de Avaliações";
                 resposta = JOptionPane.showConfirmDialog(this, mensagem, titulo, JOptionPane.YES_NO_OPTION);
                 if (resposta == JOptionPane.YES_OPTION) {
                     AvaliacaoBO avaliacaoBO = new AvaliacaoBO();
                     avaliacaoBO.excluirAvaliacao(avaliacaoSelecionado.getId_avaliacao());
                     String mensagemSucesso = "Avaliação ID:" + avaliacaoSelecionado.getId_avaliacao() + " (Atleta ID:"
-                            + avaliacaoSelecionado.getId_atleta()+ ")"
+                            + avaliacaoSelecionado.getNomeAtleta()+ ")"
                             + "excluido com sucesso.";
                     JOptionPane.showConfirmDialog(this, mensagem, "Exclusão de Avaliações", JOptionPane.INFORMATION_MESSAGE);
                     this.carregarTabelaAvaliacao();
@@ -97,12 +105,75 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         }         
      }
     
+    public void pesquisar() throws SQLException{
+        if(cboAtleta.getSelectedItem().toString().equals("Selecionar") && cboAvaliador.getSelectedItem().toString().equals("Selecionar")){
+            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
+            this.carregarTabelaAvaliacao();
+        }else if(cboAtleta.getSelectedItem().toString() != "Selecionar" && cboAvaliador.getSelectedItem().toString().equals("Selecionar")){
+            this.carregarTabelaAvaliacaoPorAtleta(cboAtleta.getSelectedItem().toString());
+        }else if(cboAtleta.getSelectedItem().toString().equals("Selecionar") && cboAvaliador.getSelectedItem().toString() != "Selecionar"){
+            this.carregarTabelaAvaliacaoPorPersonal(cboAvaliador.getSelectedItem().toString());           
+        }else{
+            this.carregarTabelaAvaliacaoPorAtletaPersonal(cboAtleta.getSelectedItem().toString(),cboAvaliador.getSelectedItem().toString());
+        }        
+    }    
+    
+    
      public void carregarTabelaAvaliacao() throws SQLException{
         AvaliacaoBO avaliacaoBO = new AvaliacaoBO();
         this.avaliacoes = avaliacaoBO.buscarTodos();        
         ModeloTabelaAvaliacao modeloTabelaAvaliacao = new ModeloTabelaAvaliacao() {};
         tblResultado.setModel(modeloTabelaAvaliacao);      
-    }     
+    }
+ 
+     public void carregarTabelaAvaliacaoPorAtleta(String atleta) throws SQLException{
+        AvaliacaoBO avaliacaoBO = new AvaliacaoBO();
+        this.avaliacoes = avaliacaoBO.carregarTabelaAvaliacaoPorAtleta(atleta);        
+        ModeloTabelaAvaliacao modeloTabelaAvaliacao = new ModeloTabelaAvaliacao() {};
+        tblResultado.setModel(modeloTabelaAvaliacao);      
+    } 
+
+     public void carregarTabelaAvaliacaoPorPersonal(String personal) throws SQLException{
+        AvaliacaoBO avaliacaoBO = new AvaliacaoBO();
+        this.avaliacoes = avaliacaoBO.carregarTabelaAvaliacaoPorPersonal(personal);        
+        ModeloTabelaAvaliacao modeloTabelaAvaliacao = new ModeloTabelaAvaliacao() {};
+        tblResultado.setModel(modeloTabelaAvaliacao);      
+    } 
+
+     public void carregarTabelaAvaliacaoPorAtletaPersonal(String atleta, String personal) throws SQLException{
+        AvaliacaoBO avaliacaoBO = new AvaliacaoBO();
+        this.avaliacoes = avaliacaoBO.carregarTabelaAvaliacaoPorAtletaPersonal(atleta, personal);        
+        ModeloTabelaAvaliacao modeloTabelaAvaliacao = new ModeloTabelaAvaliacao() {};
+        tblResultado.setModel(modeloTabelaAvaliacao);      
+    }      
+     
+    private void carregarComboAtletas() throws SQLException{
+        AtletaBO atletaBO = new AtletaBO();
+        try{
+            atletas = atletaBO.buscarTodos();
+        }catch(SQLException ex){
+        
+        }
+        cboAtleta.removeAllItems();
+        cboAtleta.addItem("Selecionar");
+        for(Atleta atleta : atletas){
+            cboAtleta.addItem(atleta.getNome());
+        }
+    } 
+
+    private void carregarComboPersonal() throws SQLException{
+        PersonalBO personalBO = new PersonalBO();
+        try{
+            personals = personalBO.buscarTodos();
+        }catch(SQLException ex){
+        
+        }
+        cboAvaliador.removeAllItems();
+        cboAvaliador.addItem("Selecionar");
+        for(PersonalTrainer personal : personals){
+            cboAvaliador.addItem(personal.getNome());
+        }
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,6 +190,7 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultado = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
+        btnGerarRelatorio = new javax.swing.JButton();
         pnlFiltro = new javax.swing.JPanel();
         lblNomeAtleta = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -176,6 +248,14 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
             }
         });
 
+        btnGerarRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/gym5.png"))); // NOI18N
+        btnGerarRelatorio.setText("Gerar Ficha de Avaliação");
+        btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarRelatorioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlResultadoLayout = new javax.swing.GroupLayout(pnlResultado);
         pnlResultado.setLayout(pnlResultadoLayout);
         pnlResultadoLayout.setHorizontalGroup(
@@ -183,7 +263,7 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
             .addGroup(pnlResultadoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
                     .addGroup(pnlResultadoLayout.createSequentialGroup()
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -192,19 +272,22 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGerarRelatorio)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlResultadoLayout.setVerticalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -295,7 +378,11 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        try {
+            this.pesquisar();
+        } catch (SQLException ex) {
+            //lançar exceção
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -306,11 +393,16 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
+    private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGerarRelatorioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnGerarRelatorio;
     private javax.swing.JButton btnNovo;
     private javax.swing.JComboBox<String> cboAtleta;
     private javax.swing.JComboBox<String> cboAvaliador;
@@ -328,9 +420,9 @@ private abstract class ModeloTabelaAvaliacao extends AbstractTableModel{
             if(coluna == 0){
                 return "ID";
             }else if(coluna == 1){
-                return "Nome Atleta(id contrução)";
+                return "Nome Atleta";
             }else if(coluna == 2){
-                return "Nome Avaliador(id construção";
+                return "Nome Avaliador";
             }else{
                 return "Data Validade";
             }
@@ -352,9 +444,9 @@ private abstract class ModeloTabelaAvaliacao extends AbstractTableModel{
             if(columnIndex == 0){
                 return avaliacao.getId_avaliacao();
             }else if (columnIndex == 1) {
-                return avaliacao.getId_atleta();
+                return avaliacao.getNomeAtleta();
             }else if(columnIndex ==2){
-                return avaliacao.getId_personal();
+                return avaliacao.getNomePersonal();
             }else{
                 return avaliacao.getDataValidade();
             }

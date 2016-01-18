@@ -9,13 +9,10 @@ import br.edu.ifnmg.kelvin.projeto.entidade.Atleta;
 import br.edu.ifnmg.kelvin.projeto.entidade.Mensalidade;
 import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.MensalidadeBO;
-import java.awt.Color;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -43,10 +40,12 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
     public void carregarComboAtletas() throws SQLException{
         AtletaBO atletaBO = new AtletaBO();
         try{
-             atletas = atletaBO.buscarTodos();
+            atletas = atletaBO.buscarTodos();
         }catch(SQLException ex){
             
         }
+        cboAtletas.removeAllItems();
+        cboAtletas.addItem("Selecionar");
         for(Atleta atleta : atletas){
             cboAtletas.addItem(atleta.getNome());
         }
@@ -104,12 +103,12 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
     // lançar exceção
     public void pesquisar() throws SQLException{
         
-        if(cboAtletas.getSelectedItem().toString().equals("") && cboMes.getSelectedIndex()== 0){
+        if(cboAtletas.getSelectedItem().toString().equals("Selecionar") && cboMes.getSelectedIndex()== 0){
             JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
             this.carregarTabelaMensalidade();
-        }else if(cboAtletas.getSelectedItem().toString() != "" && cboMes.getSelectedIndex() == 0){
+        }else if(cboAtletas.getSelectedItem().toString() != "Selecionar" && cboMes.getSelectedIndex() == 0){
             this.carregarTabelaMensalidadePorNome(cboAtletas.getSelectedItem().toString());
-        }else if(cboAtletas.getSelectedItem().equals("") && cboMes.getSelectedIndex() != 0){
+        }else if(cboAtletas.getSelectedItem().equals("Selecionar") && cboMes.getSelectedIndex() != 0){
             this.carregarTabelaMensalidadePorData(cboMes.getSelectedIndex());           
         }else{
             this.carregarTabelaMensalidadePorNomeData(cboAtletas.getSelectedItem().toString(), cboMes.getSelectedIndex());

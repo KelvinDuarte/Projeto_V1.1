@@ -20,7 +20,7 @@ import java.util.List;
 public class TreinoDAO {
     
     private static final String SQL_INSERT = "INSERT INTO TREINOS (TIPO, CATEGORIA, APARELHO1, APARELHO2, APARELHO3, APARELHO4, APARELHO5, APARELHO6, APARELHO7) VALUES (?,?,?,?,?,?,?,?,?)";
-    private final static String SQL_UPDATE = "UPDATE TREINOS SET TIPO = ?, CATEGORIA = ?, APARELHO1 = ?, APARELHO2 = ?, APARELHO3 = ?, APARELHO4 = ?, APARELHO5 = ?, APARELHO6 = ?, APARELHO7 = ?";
+    private final static String SQL_UPDATE = "UPDATE TREINOS SET TIPO = ?, CATEGORIA = ?, APARELHO1 = ?, APARELHO2 = ?, APARELHO3 = ?, APARELHO4 = ?, APARELHO5 = ?, APARELHO6 = ?, APARELHO7 = ? WHERE ID_TREINO = ?";
     private static final String SQL_DELETE = "DELETE FROM TREINOS WHERE ID_TREINO = ?";
     private static final String SQL_BUSCAR_TODOS = "SELECT * FROM TREINOS";
     private static final String SQL_BUSCAR_TIPO = "SELECT * FROM TREINOS WHERE TIPO = ?";
@@ -69,6 +69,7 @@ public class TreinoDAO {
             comando.setString(7, treino.getAparelho05());
             comando.setString(8, treino.getAparelho06());
             comando.setString(9, treino.getAparelho07());
+            comando.setInt(10, treino.getId_treino());
             comando.execute();
             conexao.commit();
         }catch(Exception e){

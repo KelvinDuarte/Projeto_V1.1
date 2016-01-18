@@ -51,7 +51,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
 
     private void editarTreino() {
         int linhaSelecionada = tblResultado.getSelectedRow();
-        if (linhaSelecionada != -1) {
+        if (linhaSelecionada != 0) {
             Treino treinoSelecionado = treinos.get(linhaSelecionada);
             CadastroTreinosForm cadastroTreinosForm = new CadastroTreinosForm(treinoSelecionado);
             cadastroTreinosForm.setVisible(true);
@@ -65,7 +65,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
     public void excluirTreino() {
         try {
             int linhaSelecionada = tblResultado.getSelectedRow();
-            if (linhaSelecionada != 1) {
+            if (linhaSelecionada != 0) {
                 Treino treinoSelecionado = treinos.get(linhaSelecionada);
                 int resposta;
                 String mensagem = "Deseja excluir o Treino ID? "
@@ -94,12 +94,12 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
     }
 
     public void pesquisar() throws SQLException{
-        if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString().equals(" ")){
+        if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
             JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
             this.carregarTabelaTreino();
-        }else if(cboTipo.getSelectedItem().toString() != " " && cboCategoria.getSelectedItem().toString().equals(" ")){
+        }else if(cboTipo.getSelectedItem().toString() != "Selecionar" && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
             this.carregarTabelaTreinoPorTipo(cboTipo.getSelectedItem().toString());
-        }else if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString() != " "){
+        }else if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString() != "Selecionar"){
             this.carregarTabelaTreinoPorCategoria(cboCategoria.getSelectedItem().toString());           
         }else{
             this.carregarTabelaTreinoPorTipoCategoria(cboTipo.getSelectedItem().toString(),cboCategoria.getSelectedItem().toString());
@@ -247,7 +247,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
 
         lblCategoria.setText("Categoria");
 
-        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Iniciante", "Intermediário", "Avançado" }));
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar", "Iniciante", "Intermediário", "Avançado" }));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
         jButton1.setText("Pesquisar");
@@ -257,7 +257,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
             }
         });
 
-        cboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Peito e Tríceps", "Costa e Bíceps", "Ombro, Trapézio", "Pernas" }));
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecionar", "Peito e Tríceps", "Costa e Bíceps", "Ombro, Trapézio", "Pernas" }));
 
         lblTipo1.setText("Tipo");
 

@@ -105,19 +105,19 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         
         }
         cboNome.removeAllItems();
-        cboNome.addItem(" ");
+        cboNome.addItem("Selecionar");
         for(Atleta atleta : atletas){
             cboNome.addItem(atleta.getNome());
         }
     }    
     
     public void pesquisar() throws SQLException{
-        if(cboNome.getSelectedItem().toString().equals(" ") && txtCPF.getText().equals("   .   .   -  ")){
+        if(cboNome.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText().equals("   .   .   -  ")){
             JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
             this.carregarTabelaAtleta();
-        }else if(cboNome.getSelectedItem().toString() != " " && txtCPF.getText().equals("   .   .   -  ")){
+        }else if(cboNome.getSelectedItem().toString() != "Selecionar" && txtCPF.getText().equals("   .   .   -  ")){
             this.carregarTabelaAtletaPorNome(cboNome.getSelectedItem().toString());
-        }else if(cboNome.getSelectedItem().toString().equals(" ") && txtCPF.getText() != "   .   .   -  "){
+        }else if(cboNome.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText() != "   .   .   -  "){
             this.carregarTabelaAtletaPorCpf(txtCPF.getText());           
         }else{
             this.carregarTabelaAtletaPorNomeCpf(cboNome.getSelectedItem().toString(),txtCPF.getText());
