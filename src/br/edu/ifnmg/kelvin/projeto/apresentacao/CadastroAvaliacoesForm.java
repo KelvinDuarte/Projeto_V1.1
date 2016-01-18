@@ -206,7 +206,7 @@ public class CadastroAvaliacoesForm extends javax.swing.JFrame {
         try {
             personals = personalBO.buscarTodos();
         } catch (SQLException ex) {
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAvaliador.removeAllItems();
         for (PersonalTrainer personal : personals) {
@@ -219,7 +219,7 @@ public class CadastroAvaliacoesForm extends javax.swing.JFrame {
         try{
             atletas = atletaBO.buscarTodos();
         }catch(SQLException ex){
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAtletas.removeAllItems();
         for(Atleta atleta : atletas){

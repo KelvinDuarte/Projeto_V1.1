@@ -109,7 +109,7 @@ public class CadastroMensalidadeForm extends javax.swing.JFrame {
         try {
             atletas = atletaBO.buscarTodos();
         } catch (SQLException ex) {
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }        
         for(Atleta atleta : atletas){
             cboAtletas.addItem(atleta.getNome());                      

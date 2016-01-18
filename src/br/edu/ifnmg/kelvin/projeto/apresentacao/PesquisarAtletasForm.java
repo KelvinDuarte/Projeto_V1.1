@@ -10,9 +10,6 @@ import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.control.ComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -102,7 +99,7 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         try{
             atletas = atletaBO.buscarTodos();
         }catch(SQLException ex){
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboNome.removeAllItems();
         cboNome.addItem("Selecionar");
@@ -352,7 +349,7 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         try {
             this.pesquisar();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -360,7 +357,7 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
         try {
             this.carregarTabelaAtleta();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 

@@ -13,18 +13,9 @@ import br.edu.ifnmg.kelvin.projeto.negocio.AvaliacaoBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.PersonalBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -174,7 +165,7 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         try{
             atletas = atletaBO.buscarTodos();
         }catch(SQLException ex){
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAtleta.removeAllItems();
         cboAtleta.addItem("Selecionar");
@@ -188,7 +179,7 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         try{
             personals = personalBO.buscarTodos();
         }catch(SQLException ex){
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAvaliador.removeAllItems();
         cboAvaliador.addItem("Selecionar");
@@ -404,7 +395,7 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         try {
             this.pesquisar();
         } catch (SQLException ex) {
-            //lançar exceção
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -412,7 +403,7 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         try {
             this.carregarTabelaAvaliacao();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 

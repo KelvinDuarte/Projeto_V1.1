@@ -10,8 +10,6 @@ import br.edu.ifnmg.kelvin.projeto.negocio.AparelhoBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -338,7 +336,7 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
         try {
             this.pesquisar();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -346,7 +344,7 @@ public class PesquisarAparelhosForm extends javax.swing.JInternalFrame {
         try {
             this.carregarTabelaAparelhos();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 

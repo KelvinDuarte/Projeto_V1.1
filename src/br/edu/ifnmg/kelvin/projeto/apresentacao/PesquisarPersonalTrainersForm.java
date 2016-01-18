@@ -10,8 +10,6 @@ import br.edu.ifnmg.kelvin.projeto.negocio.PersonalBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -104,7 +102,7 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         try {
             personals = personalBO.buscarTodos();
         } catch (SQLException ex) {
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboPersonal.removeAllItems();
         cboPersonal.addItem("Selecionar");
@@ -354,7 +352,7 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         try {
             this.pesquisar();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -362,7 +360,7 @@ public class PesquisarPersonalTrainersForm extends javax.swing.JInternalFrame {
         try {
             this.carregarTabelaPersonal();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
@@ -422,7 +420,6 @@ private abstract class ModeloTabelaPersonal extends AbstractTableModel{
         } else {
             return personalTrainer.getTelefone();
         }
-
     }
 }
 }

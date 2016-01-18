@@ -120,7 +120,7 @@ public class CadastroTreinosForm extends javax.swing.JFrame {
         try{
              aparelhos = aparelhoBO.buscarTodos();
         }catch(SQLException ex){           
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         for(Aparelho aparelho : aparelhos){
             cboAparelho1.addItem(aparelho.getNome());

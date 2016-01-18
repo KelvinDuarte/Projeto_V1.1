@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -44,7 +42,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         try{
             atletas = atletaBO.buscarTodos();
         }catch(SQLException ex){
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAtletas.removeAllItems();
         cboAtletas.addItem("Selecionar");
@@ -102,7 +100,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
             this.dispose();
         }         
      }      
-    // lançar exceção
+    
     public void pesquisar() throws SQLException{
         
         if(cboAtletas.getSelectedItem().toString().equals("Selecionar") && cboMes.getSelectedIndex()== 0){
@@ -369,7 +367,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         try {
             this.editarMensalidade();
         } catch (ParseException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -377,7 +375,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         try {
             this.visualizar();
         } catch (ParseException ex) {
-            Logger.getLogger(PesquisarMensalidadesForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnVisualizarActionPerformed
 
@@ -385,7 +383,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         try {
             this.pesquisar();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro!");
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -393,7 +391,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         try {
             this.carregarTabelaMensalidade();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
@@ -405,7 +403,7 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
     try {
             this.exibirTelaCadastroMensalidade();
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnNovoActionPerformed
 

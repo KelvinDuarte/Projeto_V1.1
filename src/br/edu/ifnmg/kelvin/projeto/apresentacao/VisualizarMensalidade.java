@@ -8,10 +8,8 @@ package br.edu.ifnmg.kelvin.projeto.apresentacao;
 
 
 import br.edu.ifnmg.kelvin.projeto.entidade.Atleta;
-import br.edu.ifnmg.kelvin.projeto.entidade.Avaliacao;
 import br.edu.ifnmg.kelvin.projeto.entidade.Mensalidade;
 import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
-import br.edu.ifnmg.kelvin.projeto.negocio.AvaliacaoBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.MensalidadeBO;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -108,7 +106,7 @@ public class VisualizarMensalidade extends javax.swing.JFrame {
         try{
             atletas = atletaBO.buscarTodos();
         }catch(SQLException ex){
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAtletas.removeAllItems();
         for(Atleta atleta : atletas){
@@ -296,7 +294,7 @@ public class VisualizarMensalidade extends javax.swing.JFrame {
         try {
             this.gerarBoleto();
         } catch (SQLException ex) {
-            Logger.getLogger(VisualizarMensalidade.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnGerarBoletoActionPerformed
 

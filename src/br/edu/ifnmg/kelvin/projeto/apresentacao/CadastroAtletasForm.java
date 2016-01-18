@@ -128,7 +128,7 @@ public class CadastroAtletasForm extends javax.swing.JFrame {
         try {
             personals = personalBO.buscarTodos();
         } catch (SQLException ex) {
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboPersonal.removeAllItems();
         for (PersonalTrainer personal : personals) {

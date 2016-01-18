@@ -24,7 +24,6 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-//JOptionPane.showMessageDialog(this, "Erro ao exibir relatório.","Erro",JOptionPane.ERROR_MESSAGE);
     public void autenticar() throws SQLException {
        InicioForm inicioForm = new InicioForm();
        UsuarioBO usuarioBO = new UsuarioBO();
@@ -180,7 +179,8 @@ public class AutenticacaoForm extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         try {
             this.autenticar();
-        } catch (SQLException ex) {          
+        } catch (SQLException ex) { 
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 

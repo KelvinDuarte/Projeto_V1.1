@@ -24,6 +24,8 @@ public class InicioForm extends javax.swing.JFrame {
     /**
      * Creates new form InicioForm
      */
+    String mensagem = "Error Desconhecido, Contate o Administrador do Sistema.";
+    
     public InicioForm() {
         
         initComponents();
@@ -216,12 +218,11 @@ public class InicioForm extends javax.swing.JFrame {
             try {
                 pesquisarAtletasForm.setMaximum(true);     
             } catch (PropertyVetoException ex) {
-            
+                JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
             }         
         }catch (SQLException ex) {     
-        
-        }
-       
+            JOptionPane.showMessageDialog(this, mensagem, "Erro Desconhecido", JOptionPane.INFORMATION_MESSAGE);
+        }      
     }//GEN-LAST:event_itmAtletasActionPerformed
 
     private void itmPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmPersonalActionPerformed
@@ -237,10 +238,10 @@ public class InicioForm extends javax.swing.JFrame {
             try {
                 pesquisarPersonalTrainersForm.setMaximum(true);
             } catch (PropertyVetoException ex) {
-                
+                JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
             }            
         } catch (SQLException ex) {
- 
+            JOptionPane.showMessageDialog(this, mensagem, "Erro Desconhecido", JOptionPane.INFORMATION_MESSAGE);
         }                 
     }//GEN-LAST:event_itmPersonalActionPerformed
 
@@ -264,10 +265,10 @@ public class InicioForm extends javax.swing.JFrame {
             try {
                 pesquisarTreinosForm.setMaximum(true);
             } catch (PropertyVetoException ex) {
-                
+                JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
             }           
         } catch (SQLException ex) {
-                     
+            JOptionPane.showMessageDialog(this, mensagem, "Erro Desconhecido", JOptionPane.INFORMATION_MESSAGE);
         }       
     }//GEN-LAST:event_itmPesquisarTreinosActionPerformed
 
@@ -289,10 +290,10 @@ public class InicioForm extends javax.swing.JFrame {
             try {
                 pesquisarAvaliacoesForm.setMaximum(true);
             } catch (PropertyVetoException ex) {
-                
+                JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
             }          
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(this, mensagem, "Erro Desconhecido", JOptionPane.INFORMATION_MESSAGE);
         }  
     }//GEN-LAST:event_itmPesquisarAvaliacoesActionPerformed
 
@@ -309,10 +310,10 @@ public class InicioForm extends javax.swing.JFrame {
             try {
                 pesquisarAparelhosForm.setMaximum(true);
             } catch (PropertyVetoException ex) {
-                
+                JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
             }
         }catch (SQLException ex) {
-                
+            JOptionPane.showMessageDialog(this, mensagem, "Erro Desconhecido", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_itmAparelhosActionPerformed
 
@@ -329,10 +330,10 @@ public class InicioForm extends javax.swing.JFrame {
             try {
                 pesquisarMensalidadesForm.setMaximum(true);
             } catch (PropertyVetoException ex) {
-                JOptionPane.showMessageDialog(null, "erro 1");
+                JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
             }           
         } catch (SQLException ex) {
-               JOptionPane.showMessageDialog(null, "erro 2");     
+            JOptionPane.showMessageDialog(this, mensagem, "Erro Desconhecido", JOptionPane.INFORMATION_MESSAGE);     
         }     
     }//GEN-LAST:event_itmMensalidadesActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

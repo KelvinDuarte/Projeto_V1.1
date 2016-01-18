@@ -66,7 +66,7 @@ public class VisualizarAvaliacao extends javax.swing.JFrame {
         try {
             personals = personalBO.buscarTodos();
         } catch (SQLException ex) {
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAvaliador.removeAllItems();
         for (PersonalTrainer personal : personals) {
@@ -79,7 +79,7 @@ public class VisualizarAvaliacao extends javax.swing.JFrame {
         try{
             atletas = atletaBO.buscarTodos();
         }catch(SQLException ex){
-        
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
         cboAtletas.removeAllItems();
         for(Atleta atleta : atletas){
@@ -680,7 +680,7 @@ public class VisualizarAvaliacao extends javax.swing.JFrame {
         try {
             this.gerarRelatorio();
         } catch (SQLException ex) {
-            //lançar exceção
+            JOptionPane.showMessageDialog(null, "Erro Desconhecido, Contate o Administrador do Sistema.");
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
