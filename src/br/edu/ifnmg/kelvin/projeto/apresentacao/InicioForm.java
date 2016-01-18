@@ -52,8 +52,6 @@ public class InicioForm extends javax.swing.JFrame {
         itmPesquisarAvaliacoes = new javax.swing.JMenuItem();
         mnuFinancas = new javax.swing.JMenu();
         itmMensalidades = new javax.swing.JMenuItem();
-        mnuRelatorios = new javax.swing.JMenu();
-        itmRelatorios = new javax.swing.JMenuItem();
         mnuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,7 +80,11 @@ public class InicioForm extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        menuPrincipal.setPreferredSize(new java.awt.Dimension(304, 40));
+
+        mnuPessoas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/gym16.png"))); // NOI18N
         mnuPessoas.setText("Pessoas");
+        mnuPessoas.setMaximumSize(new java.awt.Dimension(100, 32767));
 
         itmAtletas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_MASK));
         itmAtletas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/gymnast35.png"))); // NOI18N
@@ -106,7 +108,9 @@ public class InicioForm extends javax.swing.JFrame {
 
         menuPrincipal.add(mnuPessoas);
 
+        mnuAparelhos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/bicycle14.png"))); // NOI18N
         mnuAparelhos.setText("Aparelhos");
+        mnuAparelhos.setMaximumSize(new java.awt.Dimension(102, 32767));
 
         itmAparelhos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.ALT_MASK));
         itmAparelhos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/bicycle14.png"))); // NOI18N
@@ -120,7 +124,9 @@ public class InicioForm extends javax.swing.JFrame {
 
         menuPrincipal.add(mnuAparelhos);
 
+        mnuTreinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/flexions.png"))); // NOI18N
         mnuTreinos.setText("Treinos");
+        mnuTreinos.setMaximumSize(new java.awt.Dimension(100, 32767));
 
         itmPesquisarTreinos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.ALT_MASK));
         itmPesquisarTreinos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/gym7.png"))); // NOI18N
@@ -134,7 +140,9 @@ public class InicioForm extends javax.swing.JFrame {
 
         menuPrincipal.add(mnuTreinos);
 
+        mnuAvaliacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/medical14.png"))); // NOI18N
         mnuAvaliacoes.setText("Avaliações");
+        mnuAvaliacoes.setPreferredSize(new java.awt.Dimension(107, 32));
 
         itmPesquisarAvaliacoes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.ALT_MASK));
         itmPesquisarAvaliacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/gym5.png"))); // NOI18N
@@ -148,7 +156,9 @@ public class InicioForm extends javax.swing.JFrame {
 
         menuPrincipal.add(mnuAvaliacoes);
 
+        mnuFinancas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/creditcard3.png"))); // NOI18N
         mnuFinancas.setText("Finanças");
+        mnuFinancas.setMaximumSize(new java.awt.Dimension(100, 32767));
 
         itmMensalidades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
         itmMensalidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/cash3.png"))); // NOI18N
@@ -162,16 +172,9 @@ public class InicioForm extends javax.swing.JFrame {
 
         menuPrincipal.add(mnuFinancas);
 
-        mnuRelatorios.setText("Relatórios");
-
-        itmRelatorios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK));
-        itmRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
-        itmRelatorios.setText("Gerar Relatório");
-        mnuRelatorios.add(itmRelatorios);
-
-        menuPrincipal.add(mnuRelatorios);
-
+        mnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/exit17.png"))); // NOI18N
         mnuSair.setText("Sair");
+        mnuSair.setMaximumSize(new java.awt.Dimension(100, 32767));
         mnuSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnuSairMouseClicked(evt);
@@ -339,14 +342,12 @@ public class InicioForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmPersonal;
     private javax.swing.JMenuItem itmPesquisarAvaliacoes;
     private javax.swing.JMenuItem itmPesquisarTreinos;
-    private javax.swing.JMenuItem itmRelatorios;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JMenu mnuAparelhos;
     private javax.swing.JMenu mnuAvaliacoes;
     private javax.swing.JMenu mnuFinancas;
     private javax.swing.JMenu mnuPessoas;
-    private javax.swing.JMenu mnuRelatorios;
     private javax.swing.JMenu mnuSair;
     private javax.swing.JMenu mnuTreinos;
     private javax.swing.JDesktopPane pnlDesktop;
