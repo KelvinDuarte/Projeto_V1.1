@@ -34,5 +34,18 @@ public class PersonalBO {
     public List<PersonalTrainer> buscarTodos() throws SQLException{
         PersonalDAO personalDAO = new PersonalDAO();
         return personalDAO.buscarTodos();
+    } 
+    
+    public List<PersonalTrainer> carregarTabelaPersonalPorNome(String nome) throws SQLException{
+        PersonalDAO personalDAO = new PersonalDAO();
+        return personalDAO.carregarTabelaPersonalPorNome(nome);
+    }
+    public List<PersonalTrainer> carregarTabelaPersonalPorCpf(String cpf) throws SQLException{
+        PersonalDAO personalDAO = new PersonalDAO();
+        return personalDAO.carregarTabelaPersonalPorCpf(cpf);
+    }
+    public List<PersonalTrainer> carregarTabelaPersonalPorNomeCpf(String nome, String cpf) throws SQLException{
+        PersonalDAO personalDAO = new PersonalDAO();
+        return personalDAO.carregarTabelaPersonalPorNomeCpf(nome,cpf);
     }    
 }

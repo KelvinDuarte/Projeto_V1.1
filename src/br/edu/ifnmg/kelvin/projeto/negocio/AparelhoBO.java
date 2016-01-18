@@ -35,4 +35,21 @@ public class AparelhoBO {
         AparelhoDAO aparelhoDAO = new AparelhoDAO();
         aparelhoDAO.excluirAparelho(id_aparelho);
     }
+    
+    public List<Aparelho> carregarTabelaAparelhosPorTipo(String tipo) throws SQLException{
+        AparelhoDAO aparelhoDAO = new AparelhoDAO();
+        return aparelhoDAO.carregarTabelaAparelhosPorTipo(tipo);
+    }
+    
+    public List<Aparelho> carregarTabelaAparelhosPorCategoria(String categoria) throws SQLException{
+        AparelhoDAO aparelhoDAO = new AparelhoDAO();
+        return aparelhoDAO.carregarTabelaAparelhosPorCategoria(categoria);
+    }
+    
+    public List<Aparelho> carregarTabelaAparelhosPorTipoCategoria(String tipo, String categoria) throws SQLException{
+        AparelhoDAO aparelhoDAO = new AparelhoDAO();
+        return aparelhoDAO.carregarTabelaAparelhosPorTipoCategoria(tipo,categoria);
+    }    
+    
+    
 }

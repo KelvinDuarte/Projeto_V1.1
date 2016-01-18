@@ -25,8 +25,9 @@ public class MensalidadeDAO {
     private static final String SQL_DELETE = "DELETE FROM MENSALIDADES WHERE ID_MENSALIDADE = ?";
     private static final String SQL_BUSCAR_TODOS = "SELECT * FROM MENSALIDADES";
     private static final String SQL_BUSCAR_NOME = "SELECT * FROM MENSALIDADES WHERE NOME = ?";
-    private static final String SQL_BUSCAR_DATA = "SELECT * FROM MENSALIDADES WHERE MONTH(DATA_VENCIMENTO) = ?";
-    private static final String SQL_BUSCAR_NOME_DATA = "SELECT * FROM MENSALIDADES WHERE NOME = ? AND MONTH(DATA_VENCIMENTO) = ?";    
+    private static final String SQL_BUSCAR_DATA = "SELECT * FROM MENSALIDADES WHERE EXTRACT(MONTH FROM DATA_VENCIMENTO) = ?";
+    private static final String SQL_BUSCAR_NOME_DATA = "SELECT * FROM MENSALIDADES WHERE NOME = ? AND EXTRACT (MONTH FROM DATA_VENCIMENTO) = ?";    
+    
     public void cadastrarMensalidade(Mensalidade mensalidade) throws SQLException{
         Connection conexao = null;
         PreparedStatement comando = null;

@@ -20,9 +20,12 @@ import java.util.List;
 public class TreinoDAO {
     
     private static final String SQL_INSERT = "INSERT INTO TREINOS (TIPO, CATEGORIA, APARELHO1, APARELHO2, APARELHO3, APARELHO4, APARELHO5, APARELHO6, APARELHO7) VALUES (?,?,?,?,?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE TREINOS SET TIPO = ?, CATEGORIA = ?, APARELHO1 = ?, APARELHO2 = ?, APARELHO3 = ?, APARELHO4 = ?, APARELHO5 = ?, APARELHO6 = ?, APARELHO7 = ?";
+    private final static String SQL_UPDATE = "UPDATE TREINOS SET TIPO = ?, CATEGORIA = ?, APARELHO1 = ?, APARELHO2 = ?, APARELHO3 = ?, APARELHO4 = ?, APARELHO5 = ?, APARELHO6 = ?, APARELHO7 = ?";
     private static final String SQL_DELETE = "DELETE FROM TREINOS WHERE ID_TREINO = ?";
     private static final String SQL_BUSCAR_TODOS = "SELECT * FROM TREINOS";
+    private static final String SQL_BUSCAR_TIPO = "SELECT * FROM TREINOS WHERE TIPO = ?";
+    private static final String SQL_BUSCAR_CATEGORIA = "SELECT * FROM TREINOS WHERE CATEGORIA = ?";
+    private static final String SQL_BUSCAR_TIPO_CATEGORIA = "SELECT * FROM TREINOS WHERE TIPO = ? AND CATEGORIA = ?";
     
     public void cadastrarTreino(Treino treino) throws SQLException{
         Connection conexao = null;
@@ -95,6 +98,109 @@ public class TreinoDAO {
             BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando);
         }         
     }
+  
+    public List<Treino> carregarTabelaTreinoPorTipo(String tipo) throws SQLException{
+        List<Treino> listaTreino = new ArrayList<>();
+        Treino treino = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_TIPO);           
+            comando.setString(1, tipo);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                treino = new Treino();     
+                treino.setId_treino(resultado.getInt(1));
+                treino.setTipo(resultado.getString(2));
+                treino.setCategoria(resultado.getString(3));
+                treino.setAparelho01(resultado.getString(4));
+                treino.setAparelho02(resultado.getString(5));
+                treino.setAparelho03(resultado.getString(6));
+                treino.setAparelho04(resultado.getString(7));
+                treino.setAparelho05(resultado.getString(8));
+                treino.setAparelho06(resultado.getString(9));
+                treino.setAparelho07(resultado.getString(10));
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaTreino;
+    }
+
+    public List<Treino> carregarTabelaTreinoPorCategoria(String categoria) throws SQLException{
+        List<Treino> listaTreino = new ArrayList<>();
+        Treino treino = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_CATEGORIA);          
+            comando.setString(1, categoria);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                treino = new Treino();     
+                treino.setId_treino(resultado.getInt(1));
+                treino.setTipo(resultado.getString(2));
+                treino.setCategoria(resultado.getString(3));
+                treino.setAparelho01(resultado.getString(4));
+                treino.setAparelho02(resultado.getString(5));
+                treino.setAparelho03(resultado.getString(6));
+                treino.setAparelho04(resultado.getString(7));
+                treino.setAparelho05(resultado.getString(8));
+                treino.setAparelho06(resultado.getString(9));
+                treino.setAparelho07(resultado.getString(10));
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaTreino;
+    }
+
+    public List<Treino> carregarTabelaTreinoPorTipoCategoria(String tipo, String categoria) throws SQLException{
+        List<Treino> listaTreino = new ArrayList<>();
+        Treino treino = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_TIPO_CATEGORIA);           
+            comando.setString(1, tipo);
+            comando.setString(2, categoria);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                treino = new Treino();     
+                treino.setId_treino(resultado.getInt(1));
+                treino.setTipo(resultado.getString(2));
+                treino.setCategoria(resultado.getString(3));
+                treino.setAparelho01(resultado.getString(4));
+                treino.setAparelho02(resultado.getString(5));
+                treino.setAparelho03(resultado.getString(6));
+                treino.setAparelho04(resultado.getString(7));
+                treino.setAparelho05(resultado.getString(8));
+                treino.setAparelho06(resultado.getString(9));
+                treino.setAparelho07(resultado.getString(10));
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaTreino;
+    }    
     
     public List<Treino> buscarTodos() throws SQLException{    
         Connection conexao = null;

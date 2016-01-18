@@ -24,6 +24,10 @@ public class PersonalDAO {
     private final String SQL_UPDATE = "UPDATE PERSONAL SET NOME = ?, APELIDO = ?, FUNCAO = ?, DATA_NASCIMENTO = ?, DATA_ADMISSAO = ?, SEXO = ?, TELEFONE = ?, CPF = ?, RG = ?, ORGAO_EXPEDIDOR = ?, DATA_EXPEDICAO = ?, EMAIL = ?, ESTADO_CIVIL = ?, SALARIO = ?, ENDERECO = ?, NUMERO = ?, BAIRRO = ?, CIDADE = ?, UF = ?, CEP = ?, NACIONALIDADE = ?";
     private final String SQL_DELETE = "DELETE FROM PERSONAL WHERE ID_PERSONAL = ?";
     private final String SQL_BUSCAR_TODOS = "SELECT * FROM PERSONAL";
+    private final String SQL_BUSCAR_NOME = "SELECT * FROM PERSONAL WHERE NOME = ?";
+    private final String SQL_BUSCAR_CPF = "SELECT * FROM PERSONAL WHERE CPF = ?";
+    private final String SQL_BUSCAR_NOME_CPF = "SELECT * FROM PERSONAL WHERE NOME = ? AND CPF = ?";
+    
     
     public void cadastrarPersonal(PersonalTrainer personalTrainer) throws SQLException{
         Connection conexao = null;
@@ -128,6 +132,166 @@ public class PersonalDAO {
             BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando);
         }
     }
+
+    public List<PersonalTrainer> carregarTabelaPersonalPorNome(String nome) throws SQLException{
+        List<PersonalTrainer> listaPersonals = new ArrayList<>();
+        PersonalTrainer personal = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_NOME);         
+            comando.setString(1, nome);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                personal = new PersonalTrainer();        
+                personal.setId_personal(resultado.getInt(1));
+                personal.setNome(resultado.getString(2));
+                personal.setApelido(resultado.getString(3));        
+                String sexo = resultado.getString(4);        
+                personal.setSexo(sexo.charAt(0));        
+                java.sql.Date dataNascimento = resultado.getDate(5);        
+                personal.setDataNascimento(new Date(dataNascimento.getTime()));        
+                java.sql.Date dataAdmissao = resultado.getDate(6);        
+                personal.setDaAdmissao(new Date(dataAdmissao.getTime()));
+                personal.setFuncao(resultado.getString(7));
+                personal.setTelefone(resultado.getString(8));
+                personal.setCpf(resultado.getString(9));
+                personal.setRg(resultado.getString(10));
+                personal.setOrgaoExpedidor(resultado.getString(11));        
+                java.sql.Date dataExpedicao = resultado.getDate(12);       
+                personal.setDataExpedicao(new Date(dataExpedicao.getTime()));
+                personal.setEmail(resultado.getString(13));
+                personal.setEstadoCivil(resultado.getString(14));       
+                double salario = Double.parseDouble(resultado.getString(15));        
+                personal.setSalario(salario);
+                personal.setEndereco(resultado.getString(16));        
+                int numero = Integer.parseInt(resultado.getString(17));        
+                personal.setNumero(numero);
+                personal.setBairro(resultado.getString(18));
+                personal.setCidade(resultado.getString(19));
+                personal.setUf(resultado.getString(20));
+                personal.setCep(resultado.getString(21));
+                personal.setNacionalidade(resultado.getString(22));
+                listaPersonals.add(personal);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaPersonals;
+    }
+    
+     public List<PersonalTrainer> carregarTabelaPersonalPorCpf(String cpf) throws SQLException{
+        List<PersonalTrainer> listaPersonals = new ArrayList<>();
+        PersonalTrainer personal = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_CPF);         
+            comando.setString(1, cpf);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                personal = new PersonalTrainer();        
+                personal.setId_personal(resultado.getInt(1));
+                personal.setNome(resultado.getString(2));
+                personal.setApelido(resultado.getString(3));        
+                String sexo = resultado.getString(4);        
+                personal.setSexo(sexo.charAt(0));        
+                java.sql.Date dataNascimento = resultado.getDate(5);        
+                personal.setDataNascimento(new Date(dataNascimento.getTime()));        
+                java.sql.Date dataAdmissao = resultado.getDate(6);        
+                personal.setDaAdmissao(new Date(dataAdmissao.getTime()));
+                personal.setFuncao(resultado.getString(7));
+                personal.setTelefone(resultado.getString(8));
+                personal.setCpf(resultado.getString(9));
+                personal.setRg(resultado.getString(10));
+                personal.setOrgaoExpedidor(resultado.getString(11));        
+                java.sql.Date dataExpedicao = resultado.getDate(12);       
+                personal.setDataExpedicao(new Date(dataExpedicao.getTime()));
+                personal.setEmail(resultado.getString(13));
+                personal.setEstadoCivil(resultado.getString(14));       
+                double salario = Double.parseDouble(resultado.getString(15));        
+                personal.setSalario(salario);
+                personal.setEndereco(resultado.getString(16));        
+                int numero = Integer.parseInt(resultado.getString(17));        
+                personal.setNumero(numero);
+                personal.setBairro(resultado.getString(18));
+                personal.setCidade(resultado.getString(19));
+                personal.setUf(resultado.getString(20));
+                personal.setCep(resultado.getString(21));
+                personal.setNacionalidade(resultado.getString(22));
+                listaPersonals.add(personal);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaPersonals;
+    }
+
+    public List<PersonalTrainer> carregarTabelaPersonalPorNomeCpf(String nome, String cpf) throws SQLException{
+        List<PersonalTrainer> listaPersonals = new ArrayList<>();
+        PersonalTrainer personal = null;
+        Connection conexao = null;
+        PreparedStatement comando = null;
+        ResultSet resultado = null;           
+        try{
+            conexao = BancoDeDadosUtil.getConnection();
+            comando = conexao.prepareStatement(SQL_BUSCAR_NOME_CPF);         
+            comando.setString(1, nome);
+            comando.setString(2, cpf);
+            resultado = comando.executeQuery();
+            while(resultado.next()){
+                personal = new PersonalTrainer();        
+                personal.setId_personal(resultado.getInt(1));
+                personal.setNome(resultado.getString(2));
+                personal.setApelido(resultado.getString(3));        
+                String sexo = resultado.getString(4);        
+                personal.setSexo(sexo.charAt(0));        
+                java.sql.Date dataNascimento = resultado.getDate(5);        
+                personal.setDataNascimento(new Date(dataNascimento.getTime()));        
+                java.sql.Date dataAdmissao = resultado.getDate(6);        
+                personal.setDaAdmissao(new Date(dataAdmissao.getTime()));
+                personal.setFuncao(resultado.getString(7));
+                personal.setTelefone(resultado.getString(8));
+                personal.setCpf(resultado.getString(9));
+                personal.setRg(resultado.getString(10));
+                personal.setOrgaoExpedidor(resultado.getString(11));        
+                java.sql.Date dataExpedicao = resultado.getDate(12);       
+                personal.setDataExpedicao(new Date(dataExpedicao.getTime()));
+                personal.setEmail(resultado.getString(13));
+                personal.setEstadoCivil(resultado.getString(14));       
+                double salario = Double.parseDouble(resultado.getString(15));        
+                personal.setSalario(salario);
+                personal.setEndereco(resultado.getString(16));        
+                int numero = Integer.parseInt(resultado.getString(17));        
+                personal.setNumero(numero);
+                personal.setBairro(resultado.getString(18));
+                personal.setCidade(resultado.getString(19));
+                personal.setUf(resultado.getString(20));
+                personal.setCep(resultado.getString(21));
+                personal.setNacionalidade(resultado.getString(22));
+                listaPersonals.add(personal);
+            }
+        }catch(Exception e){
+            if(conexao != null){
+                conexao.rollback();
+            }
+        }finally{
+            BancoDeDadosUtil.fecharChamadasBancoDados(conexao, comando, resultado);
+        }
+            return listaPersonals;
+    }     
     
     public List<PersonalTrainer> buscarTodos() throws SQLException{    
         Connection conexao = null;

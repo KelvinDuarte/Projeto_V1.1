@@ -49,7 +49,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
         cadastroTreinosForm.setStatus(1);
     }
 
-    private void editarAvaliacao() {
+    private void editarTreino() {
         int linhaSelecionada = tblResultado.getSelectedRow();
         if (linhaSelecionada != -1) {
             Treino treinoSelecionado = treinos.get(linhaSelecionada);
@@ -93,6 +93,19 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
         }
     }
 
+    public void pesquisar() throws SQLException{
+        if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString().equals(" ")){
+            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
+            this.carregarTabelaTreino();
+        }else if(cboTipo.getSelectedItem().toString() != " " && cboCategoria.getSelectedItem().toString().equals(" ")){
+            this.carregarTabelaTreinoPorTipo(cboTipo.getSelectedItem().toString());
+        }else if(cboTipo.getSelectedItem().toString().equals(" ") && cboCategoria.getSelectedItem().toString() != " "){
+            this.carregarTabelaTreinoPorCategoria(cboCategoria.getSelectedItem().toString());           
+        }else{
+            this.carregarTabelaTreinoPorTipoCategoria(cboTipo.getSelectedItem().toString(),cboCategoria.getSelectedItem().toString());
+        }        
+    }
+    
     public void carregarTabelaTreino() throws SQLException {
         TreinoBO treinoBO = new TreinoBO();
         this.treinos = treinoBO.buscarTodos();
@@ -100,6 +113,30 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
         };
         tblResultado.setModel(modeloTabelaTreino);
     }
+
+    public void carregarTabelaTreinoPorTipo(String tipo) throws SQLException {
+        TreinoBO treinoBO = new TreinoBO();
+        this.treinos = treinoBO.carregarTabelaTreinoPorTipo(tipo);
+        ModeloTabelaTreino modeloTabelaTreino = new ModeloTabelaTreino() {
+        };
+        tblResultado.setModel(modeloTabelaTreino);
+    }
+
+    public void carregarTabelaTreinoPorCategoria(String categoria) throws SQLException {
+        TreinoBO treinoBO = new TreinoBO();
+        this.treinos = treinoBO.carregarTabelaTreinoPorCategoria(categoria);
+        ModeloTabelaTreino modeloTabelaTreino = new ModeloTabelaTreino() {
+        };
+        tblResultado.setModel(modeloTabelaTreino);
+    }
+
+    public void carregarTabelaTreinoPorTipoCategoria(String tipo, String categoria) throws SQLException {
+        TreinoBO treinoBO = new TreinoBO();
+        this.treinos = treinoBO.carregarTabelaTreinoPorTipoCategoria(tipo,categoria);
+        ModeloTabelaTreino modeloTabelaTreino = new ModeloTabelaTreino() {
+        };
+        tblResultado.setModel(modeloTabelaTreino);
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -210,7 +247,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
 
         lblCategoria.setText("Categoria");
 
-        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Iniciante", "Intermediário", "Avançado" }));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
         jButton1.setText("Pesquisar");
@@ -220,7 +257,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
             }
         });
 
-        cboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Peito e Tríceps", "Costa e Bíceps", "Ombro, Trapézio", "Pernas" }));
 
         lblTipo1.setText("Tipo");
 
@@ -288,7 +325,7 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        this.editarAvaliacao();
+        this.editarTreino();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -296,7 +333,11 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        try {
+            this.pesquisar();
+        } catch (SQLException ex) {
+            
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed

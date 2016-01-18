@@ -61,18 +61,14 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
 
       private void editarMensalidade() throws ParseException{
         int linhaSelecionada = tblResultado.getSelectedRow();
-        if(linhaSelecionada != -1)
-        {
+        if(linhaSelecionada != -1){
            Mensalidade mensalidadeSelecionado = mensalidades.get(linhaSelecionada);        
            CadastroMensalidadeForm cadastroMensalidadeForm = new CadastroMensalidadeForm(mensalidadeSelecionado);
            cadastroMensalidadeForm.setVisible(true);
            cadastroMensalidadeForm.setStatus(2);           
-        }
-        else
-        {
+        } else{
             String mesnagem = "Nenhuma Mensalidade Selecionada.";
-            JOptionPane.showMessageDialog(this, mesnagem, "Alteração de Mensalidades", JOptionPane.INFORMATION_MESSAGE);     
-         
+            JOptionPane.showMessageDialog(this, mesnagem, "Alteração de Mensalidades", JOptionPane.INFORMATION_MESSAGE);         
         }
     }    
     

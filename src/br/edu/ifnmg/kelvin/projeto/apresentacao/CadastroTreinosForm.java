@@ -29,14 +29,13 @@ public class CadastroTreinosForm extends javax.swing.JFrame {
     public CadastroTreinosForm(){
         this.treinoEmEdicao = new Treino();
         this.prepararTela();         
-        setLocationRelativeTo(null);
     }
     
     public CadastroTreinosForm(Treino treinoParaEdicao){
         this.treinoEmEdicao = treinoParaEdicao;
         this.prepararTela();
-        inicializarCamposTela();
-        setLocationRelativeTo(null);
+        this.inicializarCamposTela();
+        
     }
 
     private void recuperarCamposTela(){     
@@ -78,7 +77,8 @@ public class CadastroTreinosForm extends javax.swing.JFrame {
     private void prepararTela(){
         try{
             this.initComponents();
-            this.carregarComboAtletas();
+            this.carregarComboAparelhos();
+            setLocationRelativeTo(null);
             } catch (Exception e) {
             String mensagem = "Erro inesperado! Informe a mensagem de erro ao administrador do sistema.";
             mensagem += "\nMensagem de erro:\n" + e.getMessage();
@@ -115,7 +115,7 @@ public class CadastroTreinosForm extends javax.swing.JFrame {
         }       
     } 
     
-    private void carregarComboAtletas() throws SQLException{
+    private void carregarComboAparelhos() throws SQLException{
         AparelhoBO aparelhoBO = new AparelhoBO();
         try{
              aparelhos = aparelhoBO.buscarTodos();
@@ -132,6 +132,14 @@ public class CadastroTreinosForm extends javax.swing.JFrame {
             cboAparelho7.addItem(aparelho.getNome());           
         }
     }
+    
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -140,13 +148,8 @@ public class CadastroTreinosForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     
     //Getter e Setter para fazer verificação se é para Cadastrar ou Editar    
-    public int getStatus() {
-        return status;
-    }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }    
+     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

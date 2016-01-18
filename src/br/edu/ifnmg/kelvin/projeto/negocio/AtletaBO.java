@@ -35,5 +35,19 @@ public class AtletaBO {
         AtletaDAO atletaDAO = new AtletaDAO();
         return atletaDAO.buscarTodos();
     }
-        
+    
+    public List<Atleta> carregarTabelaAtletaPorNome(String nome) throws SQLException{
+        AtletaDAO atletaDAO = new AtletaDAO();  
+        return atletaDAO.carregarTabelaAtletaPorNome(nome);
+    }
+
+    public List<Atleta> carregarTabelaAtletaPorCpf(String cpf) throws SQLException{
+        AtletaDAO atletaDAO = new AtletaDAO();
+        return atletaDAO.carregarTabelaAtletaPorCpf(cpf);
+    }   
+    
+    public List<Atleta> carregarTabelaAtletaPorNomeCpf(String nome, String cpf) throws SQLException{
+        AtletaDAO atletaDAO = new AtletaDAO();
+        return atletaDAO.carregarTabelaAtletaPorNomeCpf(nome,cpf);
+    }    
 }

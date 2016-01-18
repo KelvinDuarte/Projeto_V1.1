@@ -35,4 +35,19 @@ public class MensalidadeBO {
         MensalidadeDAO mensalidadeDAO = new MensalidadeDAO(); 
         mensalidadeDAO.excluirMensalidade(id_mensalidade);
     }    
+    
+    public List<Mensalidade> pesquisarPorNome(String nome) throws SQLException{
+        MensalidadeDAO mensalidadeDAO = new MensalidadeDAO();
+       return mensalidadeDAO.pesquisarPorNome(nome);
+    }
+    
+    public List<Mensalidade> pesquisarPorData(int mes) throws SQLException{
+        MensalidadeDAO mensalidadeDAO = new MensalidadeDAO();
+       return mensalidadeDAO.pesquisarPorData(mes);
+    }  
+    
+    public List<Mensalidade> pesquisarPorNomeData(String nome,int mes) throws SQLException{
+        MensalidadeDAO mensalidadeDAO = new MensalidadeDAO();
+       return mensalidadeDAO.pesquisarPorNomeData(nome,mes);
+    } 
 }

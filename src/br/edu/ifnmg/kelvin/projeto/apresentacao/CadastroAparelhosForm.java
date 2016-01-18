@@ -31,8 +31,7 @@ public class CadastroAparelhosForm extends javax.swing.JFrame {
     
     public CadastroAparelhosForm(Aparelho aparelhoParaEdicao){
         this.aparelhoEmEdicao = aparelhoParaEdicao;
-        this.prepararTela();
-        this.inicializarCamposTela();      
+        this.prepararTela();    
     }
     
     public void inicializarCamposTela(){

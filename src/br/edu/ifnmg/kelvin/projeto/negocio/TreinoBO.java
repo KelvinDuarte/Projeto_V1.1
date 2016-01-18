@@ -35,4 +35,19 @@ public class TreinoBO {
         TreinoDAO treinoDAO = new TreinoDAO();
         return treinoDAO.buscarTodos();
     }
+    
+    public List<Treino> carregarTabelaTreinoPorTipo(String tipo) throws SQLException{
+        TreinoDAO treinoDAO = new TreinoDAO();
+        return treinoDAO.carregarTabelaTreinoPorTipo(tipo);     
+    }
+    
+    public List<Treino> carregarTabelaTreinoPorCategoria(String categoria) throws SQLException{
+        TreinoDAO treinoDAO = new TreinoDAO();
+        return treinoDAO.carregarTabelaTreinoPorCategoria(categoria);     
+    }
+    
+    public List<Treino> carregarTabelaTreinoPorTipoCategoria(String tipo, String categoria) throws SQLException{
+        TreinoDAO treinoDAO = new TreinoDAO();
+        return treinoDAO.carregarTabelaTreinoPorTipoCategoria(tipo,categoria);     
+    }    
 }
