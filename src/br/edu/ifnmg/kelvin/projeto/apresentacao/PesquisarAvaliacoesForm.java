@@ -13,11 +13,18 @@ import br.edu.ifnmg.kelvin.projeto.negocio.AvaliacaoBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.PersonalBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -49,6 +56,21 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
     public void setPosicao() {
         Dimension dimensao = this.getDesktopPane().getSize();
         this.setLocation((dimensao.width - this.getSize().width) / 2, (dimensao.height - this.getSize().height) / 2); 
+    }
+    
+    public void visualizar(){
+        int linhaSelecionada = tblResultado.getSelectedRow();
+        if(linhaSelecionada != -1)
+        {
+           Avaliacao avaliacaoSelecionado = avaliacoes.get(linhaSelecionada);        
+           VisualizarAvaliacao visualizarAvaliacao = new VisualizarAvaliacao(avaliacaoSelecionado);
+           visualizarAvaliacao.setVisible(true);          
+        }
+        else
+        {
+            String mesnagem = "Nenhuma Avaliação Selecionada.";
+            JOptionPane.showMessageDialog(this, mesnagem, "Alteração de Avaliações", JOptionPane.INFORMATION_MESSAGE);     
+        }        
     }
     
     public void exibirTelaCadastroAvaliacao(){
@@ -174,6 +196,7 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
             cboAvaliador.addItem(personal.getNome());
         }
     }    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,11 +209,11 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         pnlResultado = new javax.swing.JPanel();
         btnExcluir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
+        btnVisualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultado = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
-        btnGerarRelatorio = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
         pnlFiltro = new javax.swing.JPanel();
         lblNomeAtleta = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -219,11 +242,11 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/add182.png"))); // NOI18N
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+        btnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/search102.png"))); // NOI18N
+        btnVisualizar.setText("Visualizar");
+        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
+                btnVisualizarActionPerformed(evt);
             }
         });
 
@@ -248,11 +271,11 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
             }
         });
 
-        btnGerarRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/gym5.png"))); // NOI18N
-        btnGerarRelatorio.setText("Gerar Ficha de Avaliação");
-        btnGerarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/add182.png"))); // NOI18N
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerarRelatorioActionPerformed(evt);
+                btnNovoActionPerformed(evt);
             }
         });
 
@@ -265,6 +288,8 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
                     .addGroup(pnlResultadoLayout.createSequentialGroup()
+                        .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -272,22 +297,20 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGerarRelatorio)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlResultadoLayout.setVerticalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -373,9 +396,9 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         this.editarAvaliacao();
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        this.exibirTelaCadastroAvaliacao();
-    }//GEN-LAST:event_btnNovoActionPerformed
+    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
+       this.visualizar();
+    }//GEN-LAST:event_btnVisualizarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
@@ -393,17 +416,17 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarRelatorioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGerarRelatorioActionPerformed
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        this.exibirTelaCadastroAvaliacao();
+    }//GEN-LAST:event_btnNovoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnGerarRelatorio;
     private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnVisualizar;
     private javax.swing.JComboBox<String> cboAtleta;
     private javax.swing.JComboBox<String> cboAvaliador;
     private javax.swing.JButton jButton1;

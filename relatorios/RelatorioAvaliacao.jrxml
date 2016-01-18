@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="084b7d78-1ba1-4aae-a876-d38631fad710">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<field name="nomeAtleta" class="java.lang.String"/>
+	<field name="peso" class="java.lang.Double"/>
+	<field name="altura" class="java.lang.Double"/>
+	<field name="frequenciaCardiaca" class="java.lang.Double"/>
+	<field name="pressaoArterial" class="java.lang.Double"/>
+	<field name="torax" class="java.lang.Double"/>
+	<field name="cintura" class="java.lang.Double"/>
+	<field name="abdome" class="java.lang.Double"/>
+	<field name="quadril" class="java.lang.Double"/>
+	<field name="antebracoEsquerdo" class="java.lang.Double"/>
+	<field name="antebracoDireito" class="java.lang.Double"/>
+	<field name="bracoEsquerdo" class="java.lang.Double"/>
+	<field name="bracoDireito" class="java.lang.Double"/>
+	<field name="coxaEsquerda" class="java.lang.Double"/>
+	<field name="coxaDireita" class="java.lang.Double"/>
+	<field name="panturrilhaEsquerda" class="java.lang.Double"/>
+	<field name="panturrilhaDireita" class="java.lang.Double"/>
+	<field name="subscapular" class="java.lang.Double"/>
+	<field name="tricipital" class="java.lang.Double"/>
+	<field name="peitoral" class="java.lang.Double"/>
+	<field name="axilarMedia" class="java.lang.Double"/>
+	<field name="supraIliaca" class="java.lang.Double"/>
+	<field name="abdominal" class="java.lang.Double"/>
+	<field name="coxa" class="java.lang.Double"/>
+	<field name="flexoes" class="java.lang.Integer"/>
+	<field name="abdominais" class="java.lang.Integer"/>
+	<field name="dataAvaliacao" class="java.util.Date"/>
+	<field name="dataValidade" class="java.util.Date"/>
+	<field name="nomePersonal" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="263" y="4" width="313" height="64" uuid="c7f026e6-0eb2-4227-b660-4bfbc1e19b03"/>
+				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="03c06a52-4265-4da1-ac37-6e655d26f439"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Ficha de Avaliação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="51" y="48" width="208" height="22" uuid="6ea3bfa1-c0f8-43a5-bb54-d5db54f33cec"/>
+				<text><![CDATA[Avaliação Física do Atleta]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="556" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="6" width="555" height="1" uuid="3d3de80e-94c0-427e-96b5-ed0776d3d965"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="29" width="79" height="20" uuid="344451dd-3390-4470-b057-ec2187bac40b"/>
+				<text><![CDATA[Nome do Atleta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="29" width="472" height="20" uuid="fe21409f-a0d8-46d7-8f22-a35225d4706f"/>
+				<textFieldExpression><![CDATA[$F{nomeAtleta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="58" width="28" height="20" uuid="3fa93a96-2e0e-4346-95e1-b597eb67445f"/>
+				<text><![CDATA[Peso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="58" width="80" height="20" uuid="8a1d709a-efab-4cff-8d54-1fca6f0f3cfe"/>
+				<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="109" y="58" width="32" height="20" uuid="04e3ba5b-e5b5-4243-9502-c28388e049e3"/>
+				<text><![CDATA[Altura:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="141" y="58" width="74" height="20" uuid="0e33d7c2-fd94-40ec-8c37-81745a1bd0fb"/>
+				<textFieldExpression><![CDATA[$F{altura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="244" y="58" width="100" height="20" uuid="625db2b3-f7e5-4261-8891-7c6555e04d73"/>
+				<text><![CDATA[Frequência Cardiaca]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="344" y="58" width="36" height="20" uuid="9e8c89b3-5b5c-44f9-a5db-c9d43ee6598b"/>
+				<textFieldExpression><![CDATA[$F{frequenciaCardiaca}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="382" y="58" width="77" height="20" uuid="e8a607be-c7b4-45cb-837e-726c49f4519f"/>
+				<text><![CDATA[Pressão Arterial:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="459" y="58" width="100" height="20" uuid="8f4037ad-7e31-4bf7-8c44-1bd605b019c4"/>
+				<textFieldExpression><![CDATA[$F{pressaoArterial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="111" width="60" height="20" uuid="07c9b065-d17f-4210-8d48-490ad5ac3e0d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Perímetros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="137" width="39" height="20" uuid="69ebf422-2dea-4cf9-81b6-45eb39e708d7"/>
+				<text><![CDATA[Torax:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="41" y="137" width="30" height="20" uuid="ce639bcb-232e-44ec-86c4-6e5b1cd0c19b"/>
+				<textFieldExpression><![CDATA[$F{torax}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="157" width="39" height="20" uuid="30ad1a9b-ab36-4209-92e3-4b652f8c5d59"/>
+				<text><![CDATA[Cintura:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="41" y="157" width="30" height="20" uuid="786c065d-e9a3-4b0e-a64c-4e4b06782dda"/>
+				<textFieldExpression><![CDATA[$F{cintura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="137" width="45" height="20" uuid="76abea45-be73-4d96-9223-0725a5f50d78"/>
+				<text><![CDATA[Abdome:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="137" width="27" height="20" uuid="bf53c86b-01b2-4fce-b76e-8ef16c691c17"/>
+				<textFieldExpression><![CDATA[$F{abdome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="157" width="45" height="20" uuid="6474fb17-097f-422d-a9f5-aca32fbaac0a"/>
+				<text><![CDATA[Quadril:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="157" width="27" height="20" uuid="3c66c9c2-54b3-4c12-abd0-e7ffb1580579"/>
+				<textFieldExpression><![CDATA[$F{quadril}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="164" y="137" width="110" height="20" uuid="f766b9c6-3a60-4425-9239-f4276e1e4c0f"/>
+				<text><![CDATA[Antebraço Esquerdo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="137" width="34" height="20" uuid="34be10dd-e8e1-46c6-b796-cab4f089597c"/>
+				<textFieldExpression><![CDATA[$F{antebracoEsquerdo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="164" y="157" width="110" height="20" uuid="1b2221b4-5996-49ca-9cb9-7e7677c9fa89"/>
+				<text><![CDATA[Antebraço Direito:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="157" width="34" height="20" uuid="8e16f737-e8fd-4a6e-9ec4-5e54a6f247c9"/>
+				<textFieldExpression><![CDATA[$F{antebracoDireito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="319" y="136" width="78" height="20" uuid="1af10d7a-491e-4ce4-96f7-5b3c3d0c8b09"/>
+				<text><![CDATA[Braço Esquerdo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="397" y="136" width="29" height="20" uuid="b4914961-167d-4867-83d0-c1bfdc763381"/>
+				<textFieldExpression><![CDATA[$F{bracoEsquerdo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="319" y="156" width="78" height="20" uuid="47b3ab02-bda0-4d49-a357-6a7407745825"/>
+				<text><![CDATA[Braço Direito:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="397" y="156" width="29" height="20" uuid="2a4b5a3a-8cff-4ee2-8766-d292b3f40da0"/>
+				<textFieldExpression><![CDATA[$F{bracoDireito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="135" width="80" height="20" uuid="9be9a9f5-26e4-4d8e-bc9e-92c27fa914f0"/>
+				<text><![CDATA[Coxa Esquerda:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="518" y="135" width="33" height="20" uuid="1608fa3c-d830-4ad2-bf9a-407154a2d6d9"/>
+				<textFieldExpression><![CDATA[$F{coxaEsquerda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="155" width="80" height="20" uuid="53198c02-a7a0-4f5c-9516-63d4c079ab34"/>
+				<text><![CDATA[Coxa Direita:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="518" y="155" width="33" height="20" uuid="1897a9c9-a8df-4db6-b872-78a9d41c5696"/>
+				<textFieldExpression><![CDATA[$F{coxaDireita}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="262" width="89" height="20" uuid="b0c4662d-2ec4-4211-8888-ef6cdcb3ec70"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dobras Cutâneas]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="94" width="555" height="1" uuid="f578b15a-b801-41c6-81ee-2bc9b8f31558"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="235" width="555" height="1" uuid="c8de24c4-8180-4ac7-ab34-96462c0816c2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="164" y="188" width="110" height="20" uuid="8d6ab3c3-5356-4336-8856-a822ee89369a"/>
+				<text><![CDATA[Panturrilha Esquerda:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="188" width="34" height="20" uuid="d12fb8d1-2f44-4ac4-95d7-291a52ed6033"/>
+				<textFieldExpression><![CDATA[$F{panturrilhaEsquerda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="308" y="188" width="89" height="20" uuid="4647ebf7-d60c-4b8f-b51f-0829406924d7"/>
+				<text><![CDATA[Panturrilha Direita:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="397" y="188" width="29" height="20" uuid="a40fd610-58c4-4be0-8a3a-37a56c72fa08"/>
+				<textFieldExpression><![CDATA[$F{panturrilhaDireita}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="287" width="64" height="20" uuid="b82520bf-7761-41c0-bc3c-32e068474672"/>
+				<text><![CDATA[Subscapular:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="66" y="287" width="36" height="20" uuid="cdf12d75-17fe-40ab-94d6-34451fd6a93e"/>
+				<textFieldExpression><![CDATA[$F{subscapular}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="307" width="64" height="20" uuid="63186d63-0961-45b7-bc7e-7deb4e2a4d37"/>
+				<text><![CDATA[Tricipital:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="66" y="307" width="36" height="20" uuid="66df2b21-6dde-4170-b752-190d3e20f537"/>
+				<textFieldExpression><![CDATA[$F{tricipital}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="126" y="287" width="71" height="20" uuid="89c16b74-92b7-435c-b657-8a415db0f5b6"/>
+				<text><![CDATA[Peitoral:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="197" y="287" width="41" height="20" uuid="75ec7d74-ec5a-4a7b-868e-27c36d532675"/>
+				<textFieldExpression><![CDATA[$F{peitoral}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="126" y="307" width="71" height="20" uuid="c4eca9fc-e464-4dbb-9af0-c01fc72b3672"/>
+				<text><![CDATA[Axilar-Média:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="197" y="307" width="41" height="20" uuid="34c0ca1f-2e90-431a-b810-4883e0cc77cd"/>
+				<textFieldExpression><![CDATA[$F{axilarMedia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="263" y="307" width="66" height="20" uuid="c0f7120f-da15-4959-8ba6-85835b990af3"/>
+				<text><![CDATA[Supra-Ilíaca:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="329" y="307" width="38" height="20" uuid="aee0c247-80f8-4a7c-9afd-170e4db7b43c"/>
+				<textFieldExpression><![CDATA[$F{supraIliaca}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="263" y="287" width="66" height="20" uuid="401b6eb6-5d67-4737-b21e-4c2aab608bb8"/>
+				<text><![CDATA[Abdominal:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="329" y="287" width="38" height="20" uuid="2e3ebc71-d70e-49c0-9e6c-213c86ff9583"/>
+				<textFieldExpression><![CDATA[$F{abdominal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="287" width="29" height="20" uuid="c563d41e-9f46-4c14-b4b0-82ee6f2a1e61"/>
+				<text><![CDATA[Coxa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="426" y="287" width="100" height="20" uuid="e9c464d9-42ae-4228-abae-f8bee8d5cfae"/>
+				<textFieldExpression><![CDATA[$F{coxa}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="360" width="555" height="1" uuid="acdcf4ff-249b-4a94-ad69-6c3b5c1850b3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="380" width="60" height="20" uuid="8ab4891c-c00b-49fd-8882-16e7eef33bad"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resistência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="400" width="39" height="20" uuid="2b20f984-cff3-4624-a3ae-8eb4a69bb1de"/>
+				<text><![CDATA[Flexões:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="41" y="400" width="100" height="20" uuid="3a0ea3db-ce01-4e6d-b37d-11842614ba7b"/>
+				<textFieldExpression><![CDATA[$F{flexoes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="400" width="62" height="20" uuid="5eeec2dc-c886-46c3-8f41-86aaf2757594"/>
+				<text><![CDATA[Abdominais:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="203" y="400" width="100" height="20" uuid="d34a597a-3db4-4fd5-a2c7-27a9b96925da"/>
+				<textFieldExpression><![CDATA[$F{abdominais}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="440" width="555" height="1" uuid="fc6cacf4-b7fc-442b-9de0-882d1588671c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="2" y="520" width="79" height="20" uuid="2f161ba5-f81a-45a1-aa68-da4182bd6202"/>
+				<text><![CDATA[Data Avaliação:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="520" width="100" height="20" uuid="83137ca5-0ceb-4b87-a6c6-5995441c50a1"/>
+				<textFieldExpression><![CDATA[$F{dataAvaliacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="181" y="520" width="93" height="20" uuid="c4e15237-f5e1-4c48-8cc5-339fd1648d48"/>
+				<text><![CDATA[Data de Validade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="274" y="520" width="100" height="20" uuid="9a5555a2-1c44-42aa-922c-8873fa687a50"/>
+				<textFieldExpression><![CDATA[$F{dataValidade}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="462" width="100" height="20" uuid="d8a1efea-34f8-4049-8bea-080af4c3ce20"/>
+				<text><![CDATA[nomePersonal]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="462" width="100" height="20" uuid="c295adc1-93d3-46ff-a7be-6961b686f877"/>
+				<textFieldExpression><![CDATA[$F{nomePersonal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="9ad32b53-e033-46ae-9ba0-49750a86745e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="b95c9c88-d1cf-4e27-984f-36c92d618e0a"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="6d6ce2a0-5b4f-47ad-960a-18fcff8c7496"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="3b449c9c-097c-4f49-8db0-725f0e87ca3b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

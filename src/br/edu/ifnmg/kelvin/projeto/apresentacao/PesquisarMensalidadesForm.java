@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -143,7 +145,21 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         ModeloTabelaMensalidade modeloTabelaMensalidade = new ModeloTabelaMensalidade() {};
         tblResultado.setModel(modeloTabelaMensalidade);         
     }    
-   
+
+    public void visualizar() throws ParseException{
+        int linhaSelecionada = tblResultado.getSelectedRow();
+        if(linhaSelecionada != -1)
+        {
+           Mensalidade mensalidadeSelecionado = mensalidades.get(linhaSelecionada);        
+           VisualizarMensalidade visualizarMensalidade = new VisualizarMensalidade(mensalidadeSelecionado);
+           visualizarMensalidade.setVisible(true);          
+        }
+        else
+        {
+            String mesnagem = "Nenhuma Avaliação Selecionada.";
+            JOptionPane.showMessageDialog(this, mesnagem, "Alteração de Avaliações", JOptionPane.INFORMATION_MESSAGE);     
+        }        
+    }    
      /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -156,11 +172,11 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         pnlResultado = new javax.swing.JPanel();
         btnExcluir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnNovo = new javax.swing.JButton();
+        btnVisualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultado = new javax.swing.JTable();
-        btnExcluir1 = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
         pnlFiltro = new javax.swing.JPanel();
         lblNomeAtleta = new javax.swing.JLabel();
         lblDataMensalidade = new javax.swing.JLabel();
@@ -189,11 +205,11 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
             }
         });
 
-        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/add182.png"))); // NOI18N
-        btnNovo.setText("Novo");
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+        btnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/add182.png"))); // NOI18N
+        btnVisualizar.setText("Visualizar");
+        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
+                btnVisualizarActionPerformed(evt);
             }
         });
 
@@ -210,19 +226,19 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblResultado);
 
-        btnExcluir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/document199.png"))); // NOI18N
-        btnExcluir1.setText("Relatórios");
-        btnExcluir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluir1ActionPerformed(evt);
-            }
-        });
-
         btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/arrow95.png"))); // NOI18N
         btnAtualizar.setText("Atualizar");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/kelvin/projeto/apresentacao/Imagens/add182.png"))); // NOI18N
+        btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
             }
         });
 
@@ -235,6 +251,8 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(pnlResultadoLayout.createSequentialGroup()
+                        .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,22 +260,20 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 31, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlResultadoLayout.setVerticalGroup(
             pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlResultadoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -357,17 +373,13 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
         try {
-            this.exibirTelaCadastroMensalidade();
-        } catch (SQLException ex) {
-            
+            this.visualizar();
+        } catch (ParseException ex) {
+            Logger.getLogger(PesquisarMensalidadesForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnExcluir1ActionPerformed
+    }//GEN-LAST:event_btnVisualizarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         try {
@@ -389,14 +401,22 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboAtletasActionPerformed
 
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+    try {
+            this.exibirTelaCadastroMensalidade();
+        } catch (SQLException ex) {
+            
+        }
+    }//GEN-LAST:event_btnNovoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnExcluir1;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnVisualizar;
     private javax.swing.JComboBox<String> cboAtletas;
     private javax.swing.JComboBox<String> cboMes;
     private javax.swing.JScrollPane jScrollPane1;

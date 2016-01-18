@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fadbabc6-3948-4168-9f58-79518da68b80">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="7adc9aab-ac95-4a81-bff2-a49949119c6e"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="dataEmissao" class="java.util.Date"/>
+	<field name="dataVencimento" class="java.util.Date"/>
+	<field name="valorAPagar" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="a11d4ac6-bea0-467a-8f8d-5a9f358da3ee"/>
+				<imageExpression><![CDATA["leaf_banner_gray.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="274" height="33" uuid="5ebad551-9432-4eea-a4e2-1b5386e8a6a8"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Boleto de Pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="157" height="22" uuid="df484a62-f67a-4815-8ad3-b415ef476f48"/>
+				<text><![CDATA[Via de Pagamento]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="341" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="214" width="553" height="52" uuid="bc625bbd-32c5-49f2-a84a-3a36f4638525"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="58" width="433" height="26" uuid="ce581b20-00ae-4947-aa37-93b9180b2b38"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="84" width="433" height="130" uuid="96493b9d-f8b3-4c72-beb9-a52fbf9d6cbc"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="433" y="58" width="120" height="26" uuid="cc316e9e-2374-46ea-a2af-b536f07c9f8a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="433" y="84" width="120" height="26" uuid="faf15a19-b4ac-4063-8dd2-ba2d292213cd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="433" y="110" width="120" height="26" uuid="7855178c-87cc-47dc-818e-08f2bc76fbee"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="433" y="136" width="120" height="26" uuid="a4d04110-3bd0-4e90-964e-5246e1a9c809"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="433" y="162" width="120" height="26" uuid="34eb25eb-7cf9-490f-9cd8-e0a455c7fd89"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="433" y="188" width="120" height="26" uuid="919a28ff-d2cf-4445-b824-65d66a6b1034"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="462" y="64" width="65" height="20" uuid="29848f77-ddff-4113-9583-611000875a10"/>
+				<text><![CDATA[Data Emissão]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="90" width="79" height="20" uuid="99c913ac-388d-4862-ad0e-a995fdaf0594"/>
+				<textFieldExpression><![CDATA[$F{dataEmissao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="455" y="113" width="93" height="20" uuid="e1fdf005-7f07-4c1f-a90a-cbe95102fbc2"/>
+				<text><![CDATA[Data Vencimento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="140" width="79" height="20" uuid="78aeb94f-ad7c-4850-b57d-194659871a21"/>
+				<textFieldExpression><![CDATA[$F{dataVencimento}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="-3" y="-6" width="200" height="80" uuid="e51dee4a-2c43-4456-a03f-a7e9be768f8d"/>
+				<imageExpression><![CDATA["C:\\Users\\KELVIN\\Documents\\NetBeansProjects\\ProjetoV1-1\\Projeto_V1.1\\src\\br\\edu\\ifnmg\\kelvin\\projeto\\apresentacao\\Imagens\\logo.fw.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="7" y="123" width="268" height="17" uuid="b60e2cd0-2e7c-4759-bec9-2e7edf99a637"/>
+				<text><![CDATA[Intruções: (Texto de responsabilidade do Cedente.) ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="84" width="433" height="32" uuid="7d2fd5c1-e374-4ba9-bb46-9bd1f72c08a3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="7" y="87" width="43" height="20" uuid="94c4052d-1cb2-446a-bf44-052233430375"/>
+				<text><![CDATA[Cedente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="103" width="348" height="20" uuid="6a938197-e152-4177-8f6c-80bf71c3d1a3"/>
+				<text><![CDATA[ NF-e Associação NF-e]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="140" width="268" height="17" uuid="c4bfb022-8d28-4dab-a0a9-81018f25c1c6"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Não receber após o vencimento.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="215" width="268" height="17" uuid="5e390b60-85e5-43b3-b7bc-b4e8e8d8ab59"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISACADEMIA LTDA.  CNPJ 00.000.000/0000-00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="233" width="268" height="17" uuid="f4a05162-694e-4ade-b391-e46de7f6f8f0"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AV. VILAS BOAS 7891 3 ANDAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="251" width="268" height="17" uuid="dcbaf7fd-d602-4c56-82f0-799c3914b20f"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CENTRO - JANUÁRIA/MG  CEP 39480-000]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="266" width="553" height="62" uuid="65783d57-3a6f-44b0-9231-fe089dc33f73"/>
+			</rectangle>
+			<componentElement>
+				<reportElement x="3" y="273" width="441" height="50" uuid="b39e1e04-b7eb-471d-a0cb-e438c816d2dd"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128B" drawText="false" checksumRequired="false">
+					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<staticText>
+				<reportElement x="7" y="64" width="78" height="20" uuid="6c85fe4e-3676-41ff-b2f1-534abb1cbd82"/>
+				<text><![CDATA[Nome do Atleta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="85" y="64" width="337" height="20" uuid="559e5938-1f3d-4d41-b94f-75faf56944a6"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="462" y="168" width="93" height="20" uuid="47c55404-dbf0-4fe4-970c-333ff76cf5fe"/>
+				<text><![CDATA[Valor à Pagar]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="478" y="191" width="64" height="20" uuid="91e7193b-8eef-4d74-9ba4-c9f967ab165b"/>
+				<textFieldExpression><![CDATA[$F{valorAPagar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="fb622a30-f600-4d99-98ac-47602d18d7bb"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="6b7e3f56-4645-42e2-9352-3ac2645f91ae"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="db1abae9-e902-4e8c-887f-a06fce3815d5"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="57605606-afa9-4bfa-8117-36657bdc1b4f"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

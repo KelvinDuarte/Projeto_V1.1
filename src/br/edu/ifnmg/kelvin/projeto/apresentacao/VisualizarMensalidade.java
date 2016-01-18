@@ -12,6 +12,7 @@ import br.edu.ifnmg.kelvin.projeto.entidade.Avaliacao;
 import br.edu.ifnmg.kelvin.projeto.entidade.Mensalidade;
 import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.AvaliacaoBO;
+import br.edu.ifnmg.kelvin.projeto.negocio.MensalidadeBO;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +35,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class VisualizarMensalidade extends javax.swing.JFrame {
 
     private List<Atleta> atletas;
-    private List<Avaliacao> avaliacoes;
+    private List<Mensalidade> mensalidades;
     private Mensalidade mensalidadeEmEdicao;
     private SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
     /**
@@ -82,15 +83,15 @@ public class VisualizarMensalidade extends javax.swing.JFrame {
     }    
     
     private void gerarBoleto() throws SQLException{
-        AvaliacaoBO avaliacaoBO = new AvaliacaoBO();
-        this.avaliacoes = avaliacaoBO.buscarTodos();
+        MensalidadeBO mensalidadeBO = new MensalidadeBO();
+        this.mensalidades = mensalidadeBO.buscarTodos();
         try{
             String arquivoRelatorio = System.getProperty("user.dir")+
                     "/relatorios/RelatorioBoletoPagamento.jasper";
             
             Map<String, Object> parametros = new HashMap<String, Object>();
             
-            JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(this.avaliacoes);
+            JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(this.mensalidades);
             
             JasperPrint  relatorioGerado = JasperFillManager.fillReport(arquivoRelatorio, parametros, fonteDados);
             

@@ -9,6 +9,7 @@ import br.edu.ifnmg.kelvin.projeto.negocio.UsuarioBO;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author KELVIN
@@ -23,7 +24,7 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+//JOptionPane.showMessageDialog(this, "Erro ao exibir relatório.","Erro",JOptionPane.ERROR_MESSAGE);
     public void autenticar() throws SQLException {
        InicioForm inicioForm = new InicioForm();
        UsuarioBO usuarioBO = new UsuarioBO();
