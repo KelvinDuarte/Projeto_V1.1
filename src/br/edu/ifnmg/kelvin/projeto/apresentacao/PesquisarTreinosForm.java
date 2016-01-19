@@ -6,6 +6,7 @@
 package br.edu.ifnmg.kelvin.projeto.apresentacao;
 
 import br.edu.ifnmg.kelvin.projeto.entidade.Treino;
+import br.edu.ifnmg.kelvin.projeto.excecao.PesquisaInvalidaException;
 import br.edu.ifnmg.kelvin.projeto.negocio.TreinoBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -92,16 +93,23 @@ public class PesquisarTreinosForm extends javax.swing.JInternalFrame {
     }
 
     public void pesquisar() throws SQLException{
-        if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
-            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
-            this.carregarTabelaTreino();
-        }else if(cboTipo.getSelectedItem().toString() != "Selecionar" && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
-            this.carregarTabelaTreinoPorTipo(cboTipo.getSelectedItem().toString());
-        }else if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString() != "Selecionar"){
-            this.carregarTabelaTreinoPorCategoria(cboCategoria.getSelectedItem().toString());           
-        }else{
-            this.carregarTabelaTreinoPorTipoCategoria(cboTipo.getSelectedItem().toString(),cboCategoria.getSelectedItem().toString());
-        }        
+        try{
+            if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
+                this.carregarTabelaTreino();
+                String msg = "Pesquisa em Branco!";
+                throw new PesquisaInvalidaException(msg);
+            }else if(cboTipo.getSelectedItem().toString() != "Selecionar" && cboCategoria.getSelectedItem().toString().equals("Selecionar")){
+                this.carregarTabelaTreinoPorTipo(cboTipo.getSelectedItem().toString());
+            }else if(cboTipo.getSelectedItem().toString().equals("Selecionar") && cboCategoria.getSelectedItem().toString() != "Selecionar"){
+                this.carregarTabelaTreinoPorCategoria(cboCategoria.getSelectedItem().toString());           
+            }else{
+                this.carregarTabelaTreinoPorTipoCategoria(cboTipo.getSelectedItem().toString(),cboCategoria.getSelectedItem().toString());
+            } 
+        }catch(PesquisaInvalidaException e){
+            String mensagem = "Falha na pesquisa!\n" + e.getMessage();
+            JOptionPane.showMessageDialog(this, mensagem, "Pesquisar Aparelhos", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
     
     public void carregarTabelaTreino() throws SQLException {

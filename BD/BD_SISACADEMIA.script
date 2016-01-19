@@ -63,7 +63,7 @@ INSERT INTO APARELHOS VALUES(0,'Peck Deck',2,'Anaer\u00f3bico','Intermedi\u00e1r
 INSERT INTO APARELHOS VALUES(1,'Mesa Flexora',3,'Anaer\u00f3bico','Iniciante')
 INSERT INTO APARELHOS VALUES(3,'Cadeira Extensora',4,'Anaer\u00f3bico','Iniciante')
 INSERT INTO APARELHOS VALUES(4,'Barra',6,'Anaer\u00f3bico','Iniciante')
-INSERT INTO APARELHOS VALUES(7,'Halteres',4,'Anaer\u00f3bico','Iniciante')
+INSERT INTO APARELHOS VALUES(7,'Halteres',4,'Aer\u00f3bico','Iniciante')
 INSERT INTO APARELHOS VALUES(15,'Supino Reto',3,'Anaer\u00f3bico','Intermedi\u00e1rio')
 INSERT INTO APARELHOS VALUES(16,'Supino Inclinado',2,'Anaer\u00f3bico','Intermedi\u00e1rio')
 INSERT INTO APARELHOS VALUES(17,'Supino Declinado',2,'Anaer\u00f3bico','Intermedi\u00e1rio')

@@ -6,6 +6,7 @@
 package br.edu.ifnmg.kelvin.projeto.apresentacao;
 
 import br.edu.ifnmg.kelvin.projeto.entidade.Atleta;
+import br.edu.ifnmg.kelvin.projeto.excecao.PesquisaInvalidaException;
 import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -109,16 +110,21 @@ public class PesquisarAtletasForm extends javax.swing.JInternalFrame {
     }    
     
     public void pesquisar() throws SQLException{
-        if(cboNome.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText().equals("   .   .   -  ")){
-            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
-            this.carregarTabelaAtleta();
-        }else if(cboNome.getSelectedItem().toString() != "Selecionar" && txtCPF.getText().equals("   .   .   -  ")){
-            this.carregarTabelaAtletaPorNome(cboNome.getSelectedItem().toString());
-        }else if(cboNome.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText() != "   .   .   -  "){
-            this.carregarTabelaAtletaPorCpf(txtCPF.getText());           
-        }else{
-            this.carregarTabelaAtletaPorNomeCpf(cboNome.getSelectedItem().toString(),txtCPF.getText());
-        }        
+        try{
+            if(cboNome.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText().equals("   .   .   -  ")){
+                String msg = "Pesquisa em Branco!";
+                    throw new PesquisaInvalidaException(msg);
+            }else if(cboNome.getSelectedItem().toString() != "Selecionar" && txtCPF.getText().equals("   .   .   -  ")){
+                this.carregarTabelaAtletaPorNome(cboNome.getSelectedItem().toString());
+            }else if(cboNome.getSelectedItem().toString().equals("Selecionar") && txtCPF.getText() != "   .   .   -  "){
+                this.carregarTabelaAtletaPorCpf(txtCPF.getText());           
+            }else{
+                this.carregarTabelaAtletaPorNomeCpf(cboNome.getSelectedItem().toString(),txtCPF.getText());
+            }  
+        }catch(PesquisaInvalidaException e){
+            String mensagem = "Falha na pesquisa!\n" + e.getMessage();
+            JOptionPane.showMessageDialog(this, mensagem, "Pesquisar Aparelhos", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     public void carregarTabelaAtleta() throws SQLException{

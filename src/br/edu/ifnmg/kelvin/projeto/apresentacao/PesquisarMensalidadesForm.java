@@ -7,6 +7,7 @@ package br.edu.ifnmg.kelvin.projeto.apresentacao;
 
 import br.edu.ifnmg.kelvin.projeto.entidade.Atleta;
 import br.edu.ifnmg.kelvin.projeto.entidade.Mensalidade;
+import br.edu.ifnmg.kelvin.projeto.excecao.PesquisaInvalidaException;
 import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.MensalidadeBO;
 import java.sql.SQLException;
@@ -102,16 +103,21 @@ public class PesquisarMensalidadesForm extends javax.swing.JInternalFrame {
      }      
     
     public void pesquisar() throws SQLException{
-        
-        if(cboAtletas.getSelectedItem().toString().equals("Selecionar") && cboMes.getSelectedIndex()== 0){
-            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
-            this.carregarTabelaMensalidade();
-        }else if(cboAtletas.getSelectedItem().toString() != "Selecionar" && cboMes.getSelectedIndex() == 0){
-            this.carregarTabelaMensalidadePorNome(cboAtletas.getSelectedItem().toString());
-        }else if(cboAtletas.getSelectedItem().equals("Selecionar") && cboMes.getSelectedIndex() != 0){
-            this.carregarTabelaMensalidadePorData(cboMes.getSelectedIndex());           
-        }else{
-            this.carregarTabelaMensalidadePorNomeData(cboAtletas.getSelectedItem().toString(), cboMes.getSelectedIndex());
+        try{
+            if(cboAtletas.getSelectedItem().toString().equals("Selecionar") && cboMes.getSelectedIndex()== 0){
+                this.carregarTabelaMensalidade();
+                String msg = "Pesquisa em Branco!";
+                throw new PesquisaInvalidaException(msg);
+            }else if(cboAtletas.getSelectedItem().toString() != "Selecionar" && cboMes.getSelectedIndex() == 0){
+                this.carregarTabelaMensalidadePorNome(cboAtletas.getSelectedItem().toString());
+            }else if(cboAtletas.getSelectedItem().equals("Selecionar") && cboMes.getSelectedIndex() != 0){
+                this.carregarTabelaMensalidadePorData(cboMes.getSelectedIndex());           
+            }else{
+                this.carregarTabelaMensalidadePorNomeData(cboAtletas.getSelectedItem().toString(), cboMes.getSelectedIndex());
+            }
+        }catch(PesquisaInvalidaException e){
+            String mensagem = "Falha na pesquisa!\n" + e.getMessage();
+            JOptionPane.showMessageDialog(this, mensagem, "Pesquisar Aparelhos", JOptionPane.ERROR_MESSAGE);
         }
     }
     

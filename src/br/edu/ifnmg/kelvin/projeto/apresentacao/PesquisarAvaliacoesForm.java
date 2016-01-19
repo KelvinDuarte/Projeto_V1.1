@@ -8,6 +8,7 @@ package br.edu.ifnmg.kelvin.projeto.apresentacao;
 import br.edu.ifnmg.kelvin.projeto.entidade.Atleta;
 import br.edu.ifnmg.kelvin.projeto.entidade.Avaliacao;
 import br.edu.ifnmg.kelvin.projeto.entidade.PersonalTrainer;
+import br.edu.ifnmg.kelvin.projeto.excecao.PesquisaInvalidaException;
 import br.edu.ifnmg.kelvin.projeto.negocio.AtletaBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.AvaliacaoBO;
 import br.edu.ifnmg.kelvin.projeto.negocio.PersonalBO;
@@ -119,16 +120,22 @@ public class PesquisarAvaliacoesForm extends javax.swing.JInternalFrame {
      }
     
     public void pesquisar() throws SQLException{
-        if(cboAtleta.getSelectedItem().toString().equals("Selecionar") && cboAvaliador.getSelectedItem().toString().equals("Selecionar")){
-            JOptionPane.showMessageDialog(null, "Nenhum Campo Preenchido!");
-            this.carregarTabelaAvaliacao();
-        }else if(cboAtleta.getSelectedItem().toString() != "Selecionar" && cboAvaliador.getSelectedItem().toString().equals("Selecionar")){
-            this.carregarTabelaAvaliacaoPorAtleta(cboAtleta.getSelectedItem().toString());
-        }else if(cboAtleta.getSelectedItem().toString().equals("Selecionar") && cboAvaliador.getSelectedItem().toString() != "Selecionar"){
-            this.carregarTabelaAvaliacaoPorPersonal(cboAvaliador.getSelectedItem().toString());           
-        }else{
-            this.carregarTabelaAvaliacaoPorAtletaPersonal(cboAtleta.getSelectedItem().toString(),cboAvaliador.getSelectedItem().toString());
-        }        
+        try{
+            if(cboAtleta.getSelectedItem().toString().equals("Selecionar") && cboAvaliador.getSelectedItem().toString().equals("Selecionar")){
+                this.carregarTabelaAvaliacao();
+                String msg = "Pesquisa em Branco!";
+                throw new PesquisaInvalidaException(msg);
+            }else if(cboAtleta.getSelectedItem().toString() != "Selecionar" && cboAvaliador.getSelectedItem().toString().equals("Selecionar")){
+                this.carregarTabelaAvaliacaoPorAtleta(cboAtleta.getSelectedItem().toString());
+            }else if(cboAtleta.getSelectedItem().toString().equals("Selecionar") && cboAvaliador.getSelectedItem().toString() != "Selecionar"){
+                this.carregarTabelaAvaliacaoPorPersonal(cboAvaliador.getSelectedItem().toString());           
+            }else{
+                this.carregarTabelaAvaliacaoPorAtletaPersonal(cboAtleta.getSelectedItem().toString(),cboAvaliador.getSelectedItem().toString());
+            } 
+        }catch(PesquisaInvalidaException e){
+            String mensagem = "Falha na pesquisa!\n" + e.getMessage();
+            JOptionPane.showMessageDialog(this, mensagem, "Pesquisar Aparelhos", JOptionPane.ERROR_MESSAGE);
+        }
     }    
     
     

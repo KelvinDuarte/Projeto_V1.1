@@ -31,7 +31,8 @@ public class CadastroAparelhosForm extends javax.swing.JFrame {
     
     public CadastroAparelhosForm(Aparelho aparelhoParaEdicao){
         this.aparelhoEmEdicao = aparelhoParaEdicao;
-        this.prepararTela();    
+        this.prepararTela(); 
+        this.inicializarCamposTela();  
     }
     
     public void inicializarCamposTela(){
@@ -60,11 +61,11 @@ public class CadastroAparelhosForm extends javax.swing.JFrame {
     
     public void editarAparelho(){
       try{
-          this.recuperarCamposTela();
+          this.recuperarCamposTela(); 
           AparelhoBO aparelhoBO = new AparelhoBO();
           aparelhoBO.editarAparelho(aparelhoEmEdicao); 
           JOptionPane.showMessageDialog(this, "Aparelho modificado com sucesso!", "Cadastro de Aparelhos", JOptionPane.INFORMATION_MESSAGE);
-          this.dispose();
+          this.dispose();    
       }catch(Exception e){
             String mensagem = "Erro inesperado! Informe a mensagem de erro ao administrador do sistema.";
             mensagem += "\nMensagem de erro:\n" + e.getMessage();

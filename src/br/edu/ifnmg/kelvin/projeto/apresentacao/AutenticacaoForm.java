@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.kelvin.projeto.apresentacao;
 import br.edu.ifnmg.kelvin.projeto.entidade.Usuario;
+import br.edu.ifnmg.kelvin.projeto.excecao.LoginSenhaInvalidoException;
 import br.edu.ifnmg.kelvin.projeto.negocio.UsuarioBO;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -25,17 +26,23 @@ public class AutenticacaoForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     public void autenticar() throws SQLException {
-       InicioForm inicioForm = new InicioForm();
-       UsuarioBO usuarioBO = new UsuarioBO();
-       Usuario usuario = new Usuario();
-       usuario.setUsuario(txtUsuario.getText());
-       usuario.setSenha(txtSenha.getText());
-       usuarioAutenticacao = usuarioBO.autenticar(txtUsuario.getText(),txtSenha.getText());      
-       if(usuarioAutenticacao == null){
-           JOptionPane.showMessageDialog(null, "Login ou Senha Inválidos!");
-       }else{ 
-            this.dispose(); 
-            inicioForm.setVisible(true);
+       try{
+            InicioForm inicioForm = new InicioForm();
+            UsuarioBO usuarioBO = new UsuarioBO();
+            Usuario usuario = new Usuario();
+            usuario.setUsuario(txtUsuario.getText());
+            usuario.setSenha(txtSenha.getText());
+            usuarioAutenticacao = usuarioBO.autenticar(txtUsuario.getText(),txtSenha.getText());      
+            if(usuarioAutenticacao == null){
+                String msg = "Login ou senha Inválidos!";
+                throw new LoginSenhaInvalidoException(msg);
+            }else{ 
+                 this.dispose(); 
+                 inicioForm.setVisible(true);
+            }
+       }catch(LoginSenhaInvalidoException e){
+            String mensagem = "Erro ao Autenticar!\n" + e.getMessage();
+            JOptionPane.showMessageDialog(this, mensagem, "Autenticação", JOptionPane.ERROR_MESSAGE);
        }
     }
     /**
